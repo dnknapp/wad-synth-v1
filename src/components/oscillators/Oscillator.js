@@ -311,11 +311,11 @@ const Oscillator = ({ oscillator }) => {
 
   return (
     <div className={`synthModuleInner`}>
-      <h3 className={`synthModuleSidebar ${styles.synthModuleSidebar}`}>
+      <h3 className={`synthModuleSidebar`}>
         <span className={`displaySub block`}>Osc</span>{' '}
         <span className={`display block`}>{oscillator.legend}</span>
       </h3>
-      <div className={`synthModuleControls ${styles.synthModuleControls}`}>
+      <div className={`synthModuleControls`}>
         <OscillatorWaveSelect
           id={id}
           handleSelectWave={handleSelectWave}

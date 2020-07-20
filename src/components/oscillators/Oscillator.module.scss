@@ -13,3 +13,16 @@
 // .oscillatorControls {
 //   color: $color-dodgerblue100;
 // }
+
+// .semitone .rangeContainer {
+//   @include range-slider-color(red, #000);
+
+// }
+
+.semitone
+  .rangeContainer
+  .synthModuleControls
+  input[type='range']::-webkit-slider-thumb {
+  background: red;
+  border: 2px solid blue;
+}

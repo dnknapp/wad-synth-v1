@@ -24,7 +24,7 @@ const OscillatorState = (props) => {
         volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
         volumeControl: {
           id: 'osc1VolumeControl',
-          label: 'Volume',
+          label: 'volume',
           min: 0,
           max: 1,
           step: 0.01,
@@ -36,7 +36,7 @@ const OscillatorState = (props) => {
         detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
         detuneControlCoarse: {
           id: 'osc1DetuneControlCoarse',
-          label: 'Semitone',
+          label: 'semitone',
           min: -1200,
           max: 1200,
           step: 100,
@@ -45,7 +45,7 @@ const OscillatorState = (props) => {
         },
         detuneControlFine: {
           id: 'osc1DetuneControlFine',
-          label: 'Detune',
+          label: 'detune',
           min: -50,
           max: 50,
           step: 1,
@@ -71,7 +71,7 @@ const OscillatorState = (props) => {
         volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
         volumeControl: {
           id: 'osc2VolumeControl',
-          label: 'Volume',
+          label: 'volume',
           min: 0,
           max: 1,
           step: 0.01,
@@ -83,7 +83,7 @@ const OscillatorState = (props) => {
         detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
         detuneControlCoarse: {
           id: 'osc2DetuneControlCoarse',
-          label: 'Semitone',
+          label: 'semitone',
           min: -1200,
           max: 1200,
           step: 100,
@@ -92,7 +92,7 @@ const OscillatorState = (props) => {
         },
         detuneControlFine: {
           id: 'osc2DetuneControlFine',
-          label: 'Detune',
+          label: 'detune',
           min: -50,
           max: 50,
           step: 1,
@@ -118,7 +118,7 @@ const OscillatorState = (props) => {
         volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
         volumeControl: {
           id: 'osc3VolumeControl',
-          label: 'Volume',
+          label: 'volume',
           min: 0,
           max: 1,
           step: 0.01,
@@ -130,7 +130,7 @@ const OscillatorState = (props) => {
         detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
         detuneControlCoarse: {
           id: 'osc3DetuneControlCoarse',
-          label: 'Semitone',
+          label: 'semitone',
           min: -1200,
           max: 1200,
           step: 100,
@@ -139,7 +139,7 @@ const OscillatorState = (props) => {
         },
         detuneControlFine: {
           id: 'osc3DetuneControlFine',
-          label: 'Detune',
+          label: 'detune',
           min: -50,
           max: 50,
           step: 1,

@@ -11,10 +11,8 @@ const Oscillators = () => {
   const [osc1, osc2, osc3] = oscillators;
 
   return (
-    <section className={`synthModuleContainer ${styles.synthModuleContainer}`}>
-      <h2 className={`synthModuleHeader ${styles.synthModuleHeader}`}>
-        Oscillators
-      </h2>
+    <section className={`synthModuleContainer`}>
+      <h2 className={`synthModuleHeader`}>Oscillators</h2>
       <ul>
         <li>
           <Oscillator oscillator={osc1} />

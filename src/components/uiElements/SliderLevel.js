@@ -21,24 +21,38 @@ const SliderLevel = ({
   // console.log(step);
 
   return (
-    <label htmlFor={id} className={`labelLayout`}>
+    <label
+      // htmlFor={id}
+      id={id}
+      className={`labelLayout ${label}`}
+    >
       {label}
-      <input
-        type="range"
-        id={id}
-        name={id}
-        min={min}
-        max={max}
-        step={step}
-        value={sliderValue}
-        onChange={onChange}
-        // disabled={disabled} // Most sliders need to be disabled while a note is playing
-      />
+      <div className={`rangeContainer`}>
+        <input
+          type="range"
+          id={`${id}Range`}
+          name={`${id}Range`}
+          min={min}
+          max={max}
+          step={step}
+          value={sliderValue}
+          onChange={onChange}
+          // disabled={disabled} // Most sliders need to be disabled while a note is playing
+          aria-labelledby={id}
+        />
+        <div className={`rangeTickmarksContainer`}>
+          <div className={`rangeTickmark`}></div>
+          <div className={`rangeTickmark`}></div>
+          <div className={`rangeTickmark`}></div>
+          <div className={`rangeTickmark`}></div>
+          <div className={`rangeTickmark`}></div>
+        </div>
+      </div>
       {/* {(scaledValue * multiplier).toFixed(decimal)} */}
       <input
         type="number"
-        id={id}
-        name={id}
+        id={`${id}Number`}
+        name={`${id}Number`}
         min={min * multiplier}
         max={max * multiplier}
         step={isNaN(step) ? step : step * multiplier} // if step is not "any", multiply the step by the multiplier
@@ -50,6 +64,7 @@ const SliderLevel = ({
         onBlur={handleOnBlur}
         // readOnly
         // disabled={disabled} // Most sliders need to be disabled while a note is playing
+        aria-labelledby={id}
       />
       {unit}
     </label>

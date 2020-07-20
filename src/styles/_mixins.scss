@@ -115,55 +115,67 @@ Margins and Grid
 // }
 
 // Update the colors for each synth module
-@mixin synth-module-color($color) {
-  .synthModuleContainer {
-    border-color: $color;
-    &::after {
-      background: $color;
-    }
-  }
+// @mixin synth-module-color($color) {
+//   .synthModuleContainer {
+//     border-color: $color;
+//     &::after {
+//       background: $color;
+//     }
+//   }
 
-  .synthModuleSidebar {
-    background: $color;
-  }
+//   .synthModuleSidebar {
+//     background: $color;
+//   }
 
-  .synthModuleHeader {
-    background: $color;
-    &::after {
-      background: radial-gradient(
-        circle at 100% 100%,
-        transparent 0.5rem,
-        $color calc(0.5rem + 0.5px)
-      ); // adding .5px in the calc smooths out a pixel-y transition;
-    }
-    // @include synth-module-inner-corner($color);
-  }
-  .synthModuleSidebar {
-    background: $color;
-  }
+//   .synthModuleHeader {
+//     background: $color;
+//     &::after {
+//       background: radial-gradient(
+//         circle at 100% 100%,
+//         transparent 0.5rem,
+//         $color calc(0.5rem + 0.5px)
+//       ); // adding .5px in the calc smooths out a pixel-y transition;
+//     }
+//     // @include synth-module-inner-corner($color);
+//   }
+//   .synthModuleSidebar {
+//     background: $color;
+//   }
 
-  .synthModuleControls {
-    color: $color;
-  }
-}
+//   .synthModuleControls {
+//     color: $color;
+//   }
+// }
 
 // Update the range slider colors for each synth module
-@mixin range-slider-color($color100, $color50) {
-  .synthModuleControls input[type='range']::-webkit-slider-runnable-track {
-    background: $color50;
-  }
-  .synthModuleControls
-    input[type='range']:focus::-webkit-slider-runnable-track {
-    background: $color50;
-  }
+@mixin range-slider-color($fillColor, $borderColor) {
   .synthModuleControls input[type='range']::-webkit-slider-thumb {
-    background: $color100;
+    background: $fillColor;
+    border: 2px solid $borderColor;
   }
-  .synthModuleControls input[type='range']::-moz-range-track {
-    background: $color50;
-  }
+
   // TODO: add moz focus?
   .synthModuleControls input[type='range']::-moz-range-thumb {
-    background: $color100;
+    background: $fillColor;
+    border: 2px solid $borderColor;
   }
 }
+// @mixin range-slider-color($color100, $color50) {
+//   .synthModuleControls input[type='range']::-webkit-slider-runnable-track {
+//     background: $color50;
+//   }
+//   .synthModuleControls
+//     input[type='range']:focus::-webkit-slider-runnable-track {
+//     background: $color50;
+//   }
+//   .synthModuleControls input[type='range']::-webkit-slider-thumb {
+//     background: $color100;
+//   }
+//   .synthModuleControls input[type='range']::-moz-range-track {
+//     background: $color50;
+//   }
+//   // TODO: add moz focus?
+//   .synthModuleControls input[type='range']::-moz-range-thumb {
+//     background: $color100;
+//   }
+// }

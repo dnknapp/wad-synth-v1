@@ -184,69 +184,73 @@ const VolumeEnvelope = () => {
   };
 
   return (
-    <section className={`synthModuleContainer ${styles.synthModuleContainer}`}>
-      <h2 className={`synthModuleHeader ${styles.synthModuleHeader}`}>
-        Amplifier
-      </h2>
-      <div className={`synthModuleInner`}>
-        <div className={`synthModuleSidebar ${styles.synthModuleSidebar}`}>
-          {/* Empty sidebar */}
-        </div>
-        <div className={`synthModuleControls ${styles.synthModuleControls}`}>
-          <SliderTime
-            label={volumeEnvelopeAttack.label}
-            id={volumeEnvelopeAttack.id}
-            min={volumeEnvelopeAttack.min}
-            max={volumeEnvelopeAttack.max}
-            step={volumeEnvelopeAttack.step}
-            sliderValue={volumeEnvelopeAttack.sliderValue}
-            scaledValue={volumeEnvelopeAttack.scaledValue}
-            onChange={handleAttack}
-            // disabled={disabled}
-          />
-          <SliderTime
-            label={volumeEnvelopeDecay.label}
-            id={volumeEnvelopeDecay.id}
-            min={volumeEnvelopeDecay.min}
-            max={volumeEnvelopeDecay.max}
-            step={volumeEnvelopeDecay.step}
-            sliderValue={volumeEnvelopeDecay.sliderValue}
-            scaledValue={volumeEnvelopeDecay.scaledValue}
-            onChange={handleDecay}
-            // disabled={disabled}
-          />
+    <section className={`synthModuleContainer`}>
+      <h2 className={`synthModuleHeader`}>Amplifier</h2>
+      <ul>
+        <li>
+          <div className={`synthModuleInner`}>
+            <div className={`synthModuleSidebar`}>{/* Empty sidebar */}</div>
+            <div className={`synthModuleControls`}>
+              <SliderTime
+                label={volumeEnvelopeAttack.label}
+                id={volumeEnvelopeAttack.id}
+                min={volumeEnvelopeAttack.min}
+                max={volumeEnvelopeAttack.max}
+                step={volumeEnvelopeAttack.step}
+                sliderValue={volumeEnvelopeAttack.sliderValue}
+                scaledValue={volumeEnvelopeAttack.scaledValue}
+                onChange={handleAttack}
+                // disabled={disabled}
+              />
+              <SliderTime
+                label={volumeEnvelopeDecay.label}
+                id={volumeEnvelopeDecay.id}
+                min={volumeEnvelopeDecay.min}
+                max={volumeEnvelopeDecay.max}
+                step={volumeEnvelopeDecay.step}
+                sliderValue={volumeEnvelopeDecay.sliderValue}
+                scaledValue={volumeEnvelopeDecay.scaledValue}
+                onChange={handleDecay}
+                // disabled={disabled}
+              />
 
-          <SliderLevel
-            label={volumeEnvelopeSustain.label}
-            id={volumeEnvelopeSustain.id}
-            min={volumeEnvelopeSustain.min}
-            max={volumeEnvelopeSustain.max}
-            step={volumeEnvelopeSustain.step}
-            sliderValue={volumeEnvelopeSustain.sliderValue}
-            scaledValue={volumeEnvelopeSustain.scaledValue}
-            // onChange={handleSustain}
-            multiplier={100}
-            decimal={0}
-            onChange={({ target: { value } }) => handleSustainThrottled(value)} // Destructuring e.target.value, see the handleVolumeThrottled definition for more of an explanation
-            handleNumberInput={({ target: { value } }) =>
-              handleSustainInput(value)
-            }
-            handleOnBlur={({ target: { value } }) => handleSustainOnBlur(value)}
-          />
+              <SliderLevel
+                label={volumeEnvelopeSustain.label}
+                id={volumeEnvelopeSustain.id}
+                min={volumeEnvelopeSustain.min}
+                max={volumeEnvelopeSustain.max}
+                step={volumeEnvelopeSustain.step}
+                sliderValue={volumeEnvelopeSustain.sliderValue}
+                scaledValue={volumeEnvelopeSustain.scaledValue}
+                // onChange={handleSustain}
+                multiplier={100}
+                decimal={0}
+                onChange={({ target: { value } }) =>
+                  handleSustainThrottled(value)
+                } // Destructuring e.target.value, see the handleVolumeThrottled definition for more of an explanation
+                handleNumberInput={({ target: { value } }) =>
+                  handleSustainInput(value)
+                }
+                handleOnBlur={({ target: { value } }) =>
+                  handleSustainOnBlur(value)
+                }
+              />
 
-          <SliderTime
-            label={volumeEnvelopeRelease.label}
-            id={volumeEnvelopeRelease.id}
-            min={volumeEnvelopeRelease.min}
-            max={volumeEnvelopeRelease.max}
-            step={volumeEnvelopeRelease.step}
-            sliderValue={volumeEnvelopeRelease.sliderValue}
-            scaledValue={volumeEnvelopeRelease.scaledValue}
-            onChange={handleRelease}
-            // disabled={disabled}
-          />
-        </div>
-      </div>
+              <SliderTime
+                label={volumeEnvelopeRelease.label}
+                id={volumeEnvelopeRelease.id}
+                min={volumeEnvelopeRelease.min}
+                max={volumeEnvelopeRelease.max}
+                step={volumeEnvelopeRelease.step}
+                sliderValue={volumeEnvelopeRelease.sliderValue}
+                scaledValue={volumeEnvelopeRelease.scaledValue}
+                onChange={handleRelease}
+                // disabled={disabled}
+              />
+            </div>
+          </div>
+        </li>
+      </ul>
     </section>
   );
 };

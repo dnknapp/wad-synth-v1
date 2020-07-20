@@ -24,79 +24,52 @@ $hr-color: #ccc;
 
 // Synth 4/15
 // App
+// How to setup HSLA for css variables
+// :root {
+//   --color-azure: 205, 100%, 47%; //#008CF0
+// }
 // --- App Background
-// $color-zodiac: hsla(224, 69, 15, 1); // #0C1A42
-// $color-firefly: hsla(224, 62, 10, 1); // #0A1229
-$color-haiti: hsla(224, 61, 8, 1); // #080F21
+$color-catskill: hsla(220, 34, 92, 1); // #E4E9F2
 // --- Inputs
 $color-lcd-green: hsla(119, 75, 45, 1); // #1FC71D
+
+// Element outlines, backgrounds, text
+$color-shark: hsla(220, 12, 16, 1); // #24272E
 
 // Blue Module
 $color-azure100: hsla(205, 100, 47, 1); //#008CF0
 $color-azure50: hsla(205, 100, 47, 0.5);
 $color-azure10: hsla(205, 100, 47, 0.1);
-// :root {
-//   --color-azure: 205, 100%, 47%; //#008CF0
-// }
-
-// Yellow Module
-$color-anzac100: hsla(33, 74, 57, 1); // #E39A40
-$color-anzac50: hsla(33, 74, 57, 0.5);
-$color-anzac10: hsla(33, 74, 57, 0.1);
-
-// Red Module
 
 // Keyboard
 $color-sky100: hsla(200, 80, 66, 1); // #64C1EE
 $color-sky50: hsla(200, 80, 66, 0.5);
 $color-sky10: hsla(200, 80, 66, 0.1);
 
-// Synth 4/12
-// Darks
-$color-shark: hsla(241, 2, 15, 1);
+// Design V2
+// Blue
+$color-dodger: hsla(212, 100, 65, 1); // #4DA0FF
+$color-cobalt: hsla(212, 100, 31, 1); // #004AA0
 
-// Reds
-$color-punch: hsla(5, 70, 53, 1);
+// Orange
+$color-jaffa: hsla(20, 91, 61, 1); // #F67D40
+$color-beech: hsla(20, 100, 26, 1); // #872D00
 
-// Blues
+// Green
+$color-shamrock: hsla(146, 71, 57, 1); // #45DF88
+$color-sap: hsla(146, 100, 22, 1); // #006F30
+
+// Yellow
+$color-tahuna: hsla(61, 56, 86, 1); // #EEEFC6 "screens"/mono-spaced fonts
+$color-tahuna50: hsla(61, 56, 86, 0.5); // glow/shadows
+
+// Design V1
 $color-aztek: hsla(208, 72, 15, 1); // #0B2943 Main font color
-$color-biscay: hsla(208, 66, 23, 1); // #143D61 Contextual menus and some text
-$color-matisse: hsla(208, 64, 36, 1); // #216097 Most blue fonts and background
 $color-jellybean: hsla(208, 63, 41, 1); // #276DAA Link and button hover
-// $color-poloblue: hsla(208, 48, 72, 1);
 $color-malibu: hsla(208, 68, 93, 1); // #E1EEF9 Nav button hover background
 
 $color-mariner: hsla(208, 75, 44, 1); // #1C76C4 Only used for the Focus Outline
 
-// Gray-Blues
-$color-bayou: hsla(
-  208,
-  29,
-  35,
-  1
-); // #405C74 Some text where I wanted less contrast
-$color-balihai: hsla(
-  208,
-  30,
-  51,
-  1
-); // #5D84A7 Lighter font in the home page hero
-$color-rockblue: hsla(208, 33, 69, 1); // #96B2CA Some backgrounds and borders
-$color-botticelli: hsla(
-  208,
-  38,
-  84,
-  1
-); // #C7D7E6 Rules/borders in the navigation and question list
-$color-athens: hsla(208, 30, 91, 1); // #E1E9EF backgrounds
-
-// Reds
-$color-carmine: hsla(360, 51, 45, 1); // #AF3939 Red text, buttons, svgs
-$color-chestnut: hsla(360, 48, 50, 1); // #BD4242 Red button hover
-$color-rose: hsla(360, 57, 59, 1); // #D25C5C A few accents
-
-// Others
-$color-surf: hsla(166, 77, 29, 1); // #118368 Correct answer things
 $color-white: hsla(0, 0, 100, 1);
 
 // Text selection background color

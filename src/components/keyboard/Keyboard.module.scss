@@ -7,15 +7,16 @@
   bottom: 0;
   left: 0;
   padding: 0;
-  background: $color-haiti;
+  background: $color-shark;
   border-top: 3px solid $color-sky100;
+  z-index: 1;
 }
 
 .keyboardContainer {
   position: relative;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  // z-index: 1;
 }
 
 .keyboard {
@@ -43,14 +44,14 @@
   border-radius: 0 0 $radius-pill $radius-pill;
   background: $color-sky100;
   margin-left: -2rem;
-  color: $color-haiti;
+  color: $color-shark;
   text-align: center;
 }
 
 .blackKey {
   height: calcRem(48);
   left: -1rem;
-  background: $color-haiti;
+  background: $color-shark;
   border-radius: $radius-pill $radius-pill 0 0;
   color: $color-sky100;
   text-align: center;

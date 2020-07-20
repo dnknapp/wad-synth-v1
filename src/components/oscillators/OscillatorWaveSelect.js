@@ -1,55 +1,46 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import styles from './OscillatorWaveSelect.module.scss';
 
 const OscillatorWaveSelect = ({ id, handleSelectWave, waveSelected }) => {
+  const waveforms = [
+    {
+      value: 'triangle',
+      text: 'tri',
+    },
+    {
+      value: 'sawtooth',
+      text: 'saw',
+    },
+    {
+      value: 'square',
+      text: 'sqr',
+    },
+    {
+      value: 'sine',
+      text: 'sin',
+    },
+  ];
   return (
-    <div>
-      <h4 className={`srOnly`}>Wave Form</h4>
-
-      <label htmlFor={`${id}WaveTriangle`}>
-        <input
-          type="radio"
-          id={`${id}WaveTriangle`}
-          name={`${id}WaveSelect`}
-          value="triangle"
-          onChange={handleSelectWave}
-          checked={waveSelected === 'triangle'}
-        />{' '}
-        Triangle
-      </label>
-      <label htmlFor={`${id}WaveSawtooth`}>
-        <input
-          type="radio"
-          id={`${id}WaveSawtooth`}
-          name={`${id}WaveSelect`}
-          value="sawtooth"
-          onChange={handleSelectWave}
-          checked={waveSelected === 'sawtooth'}
-        />{' '}
-        Sawtooth
-      </label>
-      <label htmlFor={`${id}WaveSquare`}>
-        <input
-          type="radio"
-          id={`${id}WaveSquare`}
-          name={`${id}WaveSelect`}
-          value="square"
-          onChange={handleSelectWave}
-          checked={waveSelected === 'square'}
-        />{' '}
-        Square
-      </label>
-      <label htmlFor={`${id}WaveSine`}>
-        <input
-          type="radio"
-          id={`${id}WaveSine`}
-          name={`${id}WaveSelect`}
-          value="sine"
-          onChange={handleSelectWave}
-          checked={waveSelected === 'sine'}
-        />{' '}
-        Sine
-      </label>
-    </div>
+    <Fragment>
+      <h4 className={`labelBg inline`}>Shape</h4>
+      <div className={`selectButtonGroup`}>
+        {waveforms.map(({ value, text }, index) => (
+          <Fragment key={index}>
+            <input
+              type="radio"
+              id={`${id}${value}`}
+              name={`${id}WaveSelect`}
+              value={value}
+              onChange={handleSelectWave}
+              checked={waveSelected === value}
+            />
+            <label htmlFor={`${id}${value}`} className={`input`}>
+              {text}
+            </label>
+          </Fragment>
+        ))}
+      </div>
+    </Fragment>
   );
 };
 
