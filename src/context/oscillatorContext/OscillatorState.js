@@ -15,154 +15,61 @@ import {
 } from './oscillatorTypes';
 
 const OscillatorState = (props) => {
+  const oscNums = ['1', '2', '3']; // Oscillator numbers
   const initialState = {
-    oscillators: [
-      {
-        id: 'osc1',
-        legend: '1',
-        source: 'triangle',
-        volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
-        volumeControl: {
-          id: 'osc1VolumeControl',
-          label: 'volume',
-          min: 0,
-          max: 1,
-          step: 0.01,
-          sliderValue: 0.8, // What the slider visually displays
-          scaledValue: 0.8, // Default output value. Updates may be scaled
-        },
-        pitch: 'A4', // Set a default pitch on the constructor if you don't want to set the pitch on <code>play()</code>.
-        octave: '1',
-        detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
-        detuneControlCoarse: {
-          id: 'osc1DetuneControlCoarse',
-          label: 'semitone',
-          min: -1200,
-          max: 1200,
-          step: 100,
-          sliderValue: 0, // What the slider visually displays
-          scaledValue: 0, // Default output value. Updates may be scaled
-        },
-        detuneControlFine: {
-          id: 'osc1DetuneControlFine',
-          label: 'detune',
-          min: -50,
-          max: 50,
-          step: 1,
-          sliderValue: 0, // What the slider visually displays
-          scaledValue: 0, // Default output value. Updates may be scaled
-        },
-        panning: 0, // Horizontal placement of the sound source. Possible values are from 1 to -1.
-
-        env: {
-          // Init settings for the Volume envelope.
-          // These are overridden when a note plays by VolumeEnvelope.js
-          attack: 0.0, // Time in seconds from onset to peak volume.  Common values for oscillators may range from 0.05 to 0.3.
-          decay: 0.0, // Time in seconds from peak volume to sustain volume.
-          sustain: 1.0, // Sustain volume level. This is a percent of the peak volume, so sensible values are between 0 and 1.
-          hold: 0, // Time in seconds to maintain the sustain volume level. If set to -1, the sound will be sustained indefinitely until you manually call stop().
-          release: 1, // Time in seconds from the end of the hold period to zero volume, or from calling stop() to zero volume.
-        },
-      },
-      {
-        id: 'osc2',
-        legend: '2',
-        source: 'triangle',
-        volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
-        volumeControl: {
-          id: 'osc2VolumeControl',
-          label: 'volume',
-          min: 0,
-          max: 1,
-          step: 0.01,
-          sliderValue: 0.8, // What the slider visually displays
-          scaledValue: 0.8, // Default output value. Updates may be scaled
-        },
-        pitch: 'A4', // Set a default pitch on the constructor if you don't want to set the pitch on <code>play()</code>.
-        octave: '1',
-        detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
-        detuneControlCoarse: {
-          id: 'osc2DetuneControlCoarse',
-          label: 'semitone',
-          min: -1200,
-          max: 1200,
-          step: 100,
-          sliderValue: 0, // What the slider visually displays
-          scaledValue: 0, // Default output value. Updates may be scaled
-        },
-        detuneControlFine: {
-          id: 'osc2DetuneControlFine',
-          label: 'detune',
-          min: -50,
-          max: 50,
-          step: 1,
-          sliderValue: 0, // What the slider visually displays
-          scaledValue: 0, // Default output value. Updates may be scaled
-        },
-        panning: 0, // Horizontal placement of the sound source. Possible values are from 1 to -1.
-
-        env: {
-          // Init settings for the Volume envelope.
-          // These are overridden when a note plays by VolumeEnvelope.js
-          attack: 0.0, // Time in seconds from onset to peak volume.  Common values for oscillators may range from 0.05 to 0.3.
-          decay: 0.0, // Time in seconds from peak volume to sustain volume.
-          sustain: 1.0, // Sustain volume level. This is a percent of the peak volume, so sensible values are between 0 and 1.
-          hold: 0, // Time in seconds to maintain the sustain volume level. If set to -1, the sound will be sustained indefinitely until you manually call stop().
-          release: 1, // Time in seconds from the end of the hold period to zero volume, or from calling stop() to zero volume.
-        },
-      },
-      {
-        id: 'osc3',
-        legend: '3',
-        source: 'triangle',
-        volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
-        volumeControl: {
-          id: 'osc3VolumeControl',
-          label: 'volume',
-          min: 0,
-          max: 1,
-          step: 0.01,
-          sliderValue: 0.8, // What the slider visually displays
-          scaledValue: 0.8, // Default output value. Updates may be scaled
-        },
-        pitch: 'A4', // Set a default pitch on the constructor if you don't want to set the pitch on <code>play()</code>.
-        octave: '1',
-        detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
-        detuneControlCoarse: {
-          id: 'osc3DetuneControlCoarse',
-          label: 'semitone',
-          min: -1200,
-          max: 1200,
-          step: 100,
-          sliderValue: 0, // What the slider visually displays
-          scaledValue: 0, // Default output value. Updates may be scaled
-        },
-        detuneControlFine: {
-          id: 'osc3DetuneControlFine',
-          label: 'detune',
-          min: -50,
-          max: 50,
-          step: 1,
-          sliderValue: 0, // What the slider visually displays
-          scaledValue: 0, // Default output value. Updates may be scaled
-        },
-        panning: 0, // Horizontal placement of the sound source. Possible values are from 1 to -1.
-
-        env: {
-          // Init settings for the Volume envelope.
-          // These are overridden when a note plays by VolumeEnvelope.js
-          attack: 0.0, // Time in seconds from onset to peak volume.  Common values for oscillators may range from 0.05 to 0.3.
-          decay: 0.0, // Time in seconds from peak volume to sustain volume.
-          sustain: 1.0, // Sustain volume level. This is a percent of the peak volume, so sensible values are between 0 and 1.
-          hold: 0, // Time in seconds to maintain the sustain volume level. If set to -1, the sound will be sustained indefinitely until you manually call stop().
-          release: 1, // Time in seconds from the end of the hold period to zero volume, or from calling stop() to zero volume.
-        },
-      },
-    ],
-    notePitch: null,
-    notePlaying: false,
-    noteVolume: 0,
+    oscillators: [],
   };
+  // Loop through oscillator numbers and add oscillator objects to the initial state
+  (function addOscillator() {
+    oscNums.forEach((num) => {
+      initialState.oscillators.push({
+        id: `osc${num}`,
+        legend: `${num}`,
+        source: 'triangle',
+        volume: 0.8, // Peak volume can range from 0 to an arbitrarily high number, but you probably shouldn't set it higher than 1.
+        volumeControl: {
+          id: `osc${num}VolumeControl`,
+          label: 'volume',
+          min: 0,
+          max: 1,
+          step: 0.01,
+          sliderValue: 0.8, // What the slider visually displays
+          scaledValue: 0.8, // Default output value. Updates may be scaled
+        },
+        pitch: 'A4', // Set a default pitch on the constructor if you don't want to set the pitch on <code>play()</code>.
+        octave: '1',
+        detune: 0, // Set a default detune on the constructor if you don't want to set detune on <code>play()</code>. Detune is measured in cents. 100 cents is equal to 1 semitone.
+        detuneControlCoarse: {
+          id: `osc${num}DetuneControlCoarse`,
+          label: 'semitone',
+          min: -1200,
+          max: 1200,
+          step: 100,
+          sliderValue: 0, // What the slider visually displays
+          scaledValue: 0, // Default output value. Updates may be scaled
+        },
+        detuneControlFine: {
+          id: `osc${num}DetuneControlFine`,
+          label: 'detune',
+          min: -50,
+          max: 50,
+          step: 1,
+          sliderValue: 0, // What the slider visually displays
+          scaledValue: 0, // Default output value. Updates may be scaled
+        },
+        panning: 0, // Horizontal placement of the sound source. Possible values are from 1 to -1.
+        env: {
+          // Init settings for the Volume envelope.
+          // These are overridden when a note plays by VolumeEnvelope.js
+          attack: 0.0, // Time in seconds from onset to peak volume.  Common values for oscillators may range from 0.05 to 0.3.
+          decay: 0.0, // Time in seconds from peak volume to sustain volume.
+          sustain: 1.0, // Sustain volume level. This is a percent of the peak volume, so sensible values are between 0 and 1.
+          hold: 0, // Time in seconds to maintain the sustain volume level. If set to -1, the sound will be sustained indefinitely until you manually call stop().
+          release: 1, // Time in seconds from the end of the hold period to zero volume, or from calling stop() to zero volume.
+        },
+      });
+    });
+  })();
 
   //All of our actions involving state go below. The type of action is dispatched to the Reducer.
   const [state, dispatch] = useReducer(oscillatorReducer, initialState);
