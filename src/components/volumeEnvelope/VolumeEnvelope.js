@@ -111,259 +111,54 @@ const VolumeEnvelope = () => {
   }, [volumeEnvelopeRelease]);
   // Event Handlers
 
-  // const handleAttack = (e) => {
-  //   getScaledValue(
-  //     volumeEnvelopeAttack.min,
-  //     volumeEnvelopeAttack.max,
-  //     e.target.value,
-  //     3
-  //   );
-  //   // console.log(scaledValue);
-  //   setVolumeEnvelopeAttack(parseFloat(e.target.value), scaledValue);
-  // };
-
-  const handleAttackThrottled = useRef(
-    throttle(function handleAttack(value) {
-      // let attackValue;
-      getScaledValue(
-        volumeEnvelopeAttack.min,
-        volumeEnvelopeAttack.max,
-        value,
-        2
-      );
-      setVolumeEnvelopeAttack(Number(value), scaledValue);
-    }, 50)
-  ).current;
-  // --- Attack Number Input
-  const handleAttackInput = (value) => {
-    if (
-      value * 0.001 <= volumeEnvelopeAttack.max &&
-      value * 0.001 >= volumeEnvelopeAttack.min &&
-      value !== ''
+  const handleSliderThrottled = useRef(
+    throttle(function handleSlider(
+      controlName,
+      controlSetter,
+      value,
+      sliderPower
     ) {
-      getInvertedValue(
-        // Invert the scale function to update the slider value
-        volumeEnvelopeAttack.min,
-        volumeEnvelopeAttack.max,
-        value * 0.001,
-        2
-      );
-      setVolumeEnvelopeAttack(invertedValue, value * 0.001);
-    } else if (value === '') {
-      setVolumeEnvelopeAttack('', '');
-    } else if (value * 0.001 > volumeEnvelopeAttack.max) {
-      setVolumeEnvelopeAttack(
-        volumeEnvelopeAttack.max,
-        volumeEnvelopeAttack.max
-      );
-    } else if (value * 0.001 < volumeEnvelopeAttack.min) {
-      setVolumeEnvelopeAttack(
-        volumeEnvelopeAttack.min,
-        volumeEnvelopeAttack.min
-      );
-    }
-  };
-  // Attack Number Input onBlur
-  const handleAttackOnBlur = (value) => {
-    if (value === '') {
-      setVolumeEnvelopeAttack(
-        0.001, // Set the value to 1 if the input is empty
-        0.001
-      );
-    }
-  };
-
-  // const handleDecay = (e) => {
-  //   getScaledValue(
-  //     volumeEnvelopeDecay.min,
-  //     volumeEnvelopeDecay.max,
-  //     e.target.value,
-  //     3
-  //   );
-  //   // console.log(scaledValue);
-  //   setVolumeEnvelopeDecay(parseFloat(e.target.value), scaledValue);
-  // };
-
-  const handleDecayThrottled = useRef(
-    throttle(function handleDecay(value) {
-      // let decayValue;
-      getScaledValue(
-        volumeEnvelopeDecay.min,
-        volumeEnvelopeDecay.max,
-        value,
-        2
-      );
-      setVolumeEnvelopeDecay(Number(value), scaledValue);
-    }, 50)
-  ).current;
-  // --- Decay Number Input
-  const handleDecayInput = (value) => {
-    if (
-      value * 0.001 <= volumeEnvelopeDecay.max &&
-      value * 0.001 >= volumeEnvelopeDecay.min &&
-      value !== ''
-    ) {
-      getInvertedValue(
-        // Invert the scale function to update the slider value
-        volumeEnvelopeDecay.min,
-        volumeEnvelopeDecay.max,
-        value * 0.001,
-        2
-      );
-      setVolumeEnvelopeDecay(invertedValue, value * 0.001);
-    } else if (value === '') {
-      setVolumeEnvelopeDecay('', '');
-    } else if (value * 0.001 > volumeEnvelopeDecay.max) {
-      setVolumeEnvelopeDecay(volumeEnvelopeDecay.max, volumeEnvelopeDecay.max);
-    } else if (value * 0.001 < volumeEnvelopeDecay.min) {
-      setVolumeEnvelopeDecay(volumeEnvelopeDecay.min, volumeEnvelopeDecay.min);
-    }
-  };
-  // Decay Number Input onBlur
-  const handleDecayOnBlur = (value) => {
-    if (value === '') {
-      setVolumeEnvelopeDecay(
-        0.001, // Set the value to 1 if the input is empty
-        0.001
-      );
-    }
-  };
-
-  // const handleSustain = (e) => {
-  //   setVolumeEnvelopeSustain(parseFloat(e.target.value));
-  // };
-
-  // const handleSustain = (e) => {
-  //   getScaledValue(
-  //     volumeEnvelopeSustain.min,
-  //     volumeEnvelopeSustain.max,
-  //     e.target.value,
-  //     1
-  //   );
-  //   // console.log(scaledValue);
-  //   setVolumeEnvelopeSustain(parseFloat(e.target.value), scaledValue);
-  // };
-
-  const handleSustainThrottled = useRef(
-    throttle(function handleSustain(value) {
-      // let sustainValue;
-      getScaledValue(
-        volumeEnvelopeSustain.min,
-        volumeEnvelopeSustain.max,
-        value,
-        1
-      );
-      setVolumeEnvelopeSustain(Number(value), scaledValue);
-    }, 50)
-  ).current;
-  // --- Sustain Number Input
-  const handleSustainInput = (value) => {
-    if (
-      value * 0.01 <= volumeEnvelopeSustain.max &&
-      value * 0.01 >= volumeEnvelopeSustain.min &&
-      value !== ''
-    ) {
-      getInvertedValue(
-        // Invert the scale function to update the slider value
-        volumeEnvelopeSustain.min,
-        volumeEnvelopeSustain.max,
-        value * 0.01,
-        1
-      );
-      setVolumeEnvelopeSustain(invertedValue, value * 0.01);
-    } else if (value === '') {
-      setVolumeEnvelopeSustain('', '');
-    } else if (value * 0.01 > volumeEnvelopeSustain.max) {
-      setVolumeEnvelopeSustain(
-        volumeEnvelopeSustain.max,
-        volumeEnvelopeSustain.max
-      );
-    } else if (value * 0.01 < volumeEnvelopeSustain.min) {
-      setVolumeEnvelopeSustain(
-        volumeEnvelopeSustain.min,
-        volumeEnvelopeSustain.min
-      );
-    }
-  };
-  // Sustain Number Input onBlur
-  const handleSustainOnBlur = (value) => {
-    if (value === '') {
-      setVolumeEnvelopeSustain(
-        1, // Set the value to 1 if the input is empty
-        1
-      );
-    }
-  };
-
-  // const handleHold = (e) => {
-  //   getScaledValue(
-  //     volumeEnvelopeHold.min,
-  //     volumeEnvelopeHold.max,
-  //     e.target.value,
-  //     3
-  //   );
-  //   // console.log(scaledValue);
-  //   setVolumeEnvelopeHold(parseFloat(e.target.value), scaledValue);
-  // };
-
-  const handleRelease = (e) => {
-    getScaledValue(
-      volumeEnvelopeRelease.min,
-      volumeEnvelopeRelease.max,
-      e.target.value,
-      3
-    );
-    // console.log(scaledValue);
-    setVolumeEnvelopeRelease(parseFloat(e.target.value), scaledValue);
-  };
-
-  const handleReleaseThrottled = useRef(
-    throttle(function handleRelease(value) {
       // let releaseValue;
-      getScaledValue(
-        volumeEnvelopeRelease.min,
-        volumeEnvelopeRelease.max,
-        value,
-        2
-      );
-      setVolumeEnvelopeRelease(Number(value), scaledValue);
-    }, 50)
+      getScaledValue(controlName.min, controlName.max, value, sliderPower);
+      controlSetter(Number(value), scaledValue);
+    },
+    50)
   ).current;
   // --- Release Number Input
-  const handleReleaseInput = (value) => {
+  // valueMultiplier: multiply value by .001 to get miliseconds
+  const handleNumberInput = (
+    controlName,
+    controlSetter,
+    value,
+    valueMultiplier,
+    sliderPower
+  ) => {
     if (
-      value * 0.001 <= volumeEnvelopeRelease.max &&
-      value * 0.001 >= volumeEnvelopeRelease.min &&
+      value * valueMultiplier <= controlName.max &&
+      value * valueMultiplier >= controlName.min &&
       value !== ''
     ) {
       getInvertedValue(
         // Invert the scale function to update the slider value
-        volumeEnvelopeRelease.min,
-        volumeEnvelopeRelease.max,
-        value * 0.001,
-        2
+        controlName.min,
+        controlName.max,
+        value * valueMultiplier,
+        sliderPower
       );
-      setVolumeEnvelopeRelease(invertedValue, value * 0.001);
+      controlSetter(invertedValue, value * valueMultiplier);
     } else if (value === '') {
-      setVolumeEnvelopeRelease('', '');
-    } else if (value * 0.001 > volumeEnvelopeRelease.max) {
-      setVolumeEnvelopeRelease(
-        volumeEnvelopeRelease.max,
-        volumeEnvelopeRelease.max
-      );
-    } else if (value * 0.001 < volumeEnvelopeRelease.min) {
-      setVolumeEnvelopeRelease(
-        volumeEnvelopeRelease.min,
-        volumeEnvelopeRelease.min
-      );
+      controlSetter('', '');
+    } else if (value * valueMultiplier > controlName.max) {
+      controlSetter(controlName.max, controlName.max);
+    } else if (value * valueMultiplier < controlName.min) {
+      controlSetter(controlName.min, controlName.min);
     }
   };
-  // Release Number Input onBlur
-  const handleReleaseOnBlur = (value) => {
+  const handleNumberOnBlur = (controlSetter, value, resetValue) => {
     if (value === '') {
-      setVolumeEnvelopeRelease(
-        0.001, // Set the value to 1 if the input is empty
-        0.001
+      controlSetter(
+        resetValue, // Set the value to 1 if the input is empty
+        resetValue
       );
     }
   };
@@ -388,13 +183,28 @@ const VolumeEnvelope = () => {
                 multiplier={1000}
                 decimal={0}
                 onChange={({ target: { value } }) =>
-                  handleAttackThrottled(value)
+                  handleSliderThrottled(
+                    volumeEnvelopeAttack, // control name
+                    setVolumeEnvelopeAttack, // control setter function
+                    value, // current value of the slider
+                    2 // slider power
+                  )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
-                  handleAttackInput(value)
+                  handleNumberInput(
+                    volumeEnvelopeAttack, // control name
+                    setVolumeEnvelopeAttack, // control setter function
+                    value, // current value
+                    0.001, // value multiplier
+                    2 // slider power
+                  )
                 }
                 handleOnBlur={({ target: { value } }) =>
-                  handleAttackOnBlur(value)
+                  handleNumberOnBlur(
+                    setVolumeEnvelopeAttack, // control setter function
+                    value, // current value
+                    0.001 // reset value (before the multiplier) if the input is empty
+                  )
                 }
               />
               <SliderTime
@@ -409,27 +219,30 @@ const VolumeEnvelope = () => {
                 multiplier={1000}
                 decimal={0}
                 onChange={({ target: { value } }) =>
-                  handleDecayThrottled(value)
+                  handleSliderThrottled(
+                    volumeEnvelopeDecay, // control name
+                    setVolumeEnvelopeDecay, // control setter function
+                    value, // current value of the slider
+                    2 // slider power
+                  )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
-                  handleDecayInput(value)
+                  handleNumberInput(
+                    volumeEnvelopeDecay, // control name
+                    setVolumeEnvelopeDecay, // control setter function
+                    value, // current value
+                    0.001, // value multiplier
+                    2 // slider power
+                  )
                 }
                 handleOnBlur={({ target: { value } }) =>
-                  handleDecayOnBlur(value)
+                  handleNumberOnBlur(
+                    setVolumeEnvelopeDecay, // control setter function
+                    value, // current value
+                    0.001 // reset value (before the multiplier) if the input is empty
+                  )
                 }
               />
-              {/* <SliderTime
-                label={volumeEnvelopeDecay.label}
-                id={volumeEnvelopeDecay.id}
-                min={volumeEnvelopeDecay.min}
-                max={volumeEnvelopeDecay.max}
-                step={volumeEnvelopeDecay.step}
-                sliderValue={volumeEnvelopeDecay.sliderValue}
-                scaledValue={volumeEnvelopeDecay.scaledValue}
-                onChange={handleDecay}
-                // disabled={disabled}
-              /> */}
-
               <SliderLevel
                 label={volumeEnvelopeSustain.label}
                 id={volumeEnvelopeSustain.id}
@@ -438,17 +251,32 @@ const VolumeEnvelope = () => {
                 step={volumeEnvelopeSustain.step}
                 sliderValue={volumeEnvelopeSustain.sliderValue}
                 scaledValue={volumeEnvelopeSustain.scaledValue}
-                // onChange={handleSustain}
+                // disabled={disabled}
                 multiplier={100}
                 decimal={0}
                 onChange={({ target: { value } }) =>
-                  handleSustainThrottled(value)
+                  handleSliderThrottled(
+                    volumeEnvelopeSustain, // control name
+                    setVolumeEnvelopeSustain, // control setter function
+                    value, // current value of the slider
+                    1 // slider power
+                  )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
-                  handleSustainInput(value)
+                  handleNumberInput(
+                    volumeEnvelopeSustain, // control name
+                    setVolumeEnvelopeSustain, // control setter function
+                    value, // current value
+                    0.01, // value multiplier
+                    1 // slider power
+                  )
                 }
                 handleOnBlur={({ target: { value } }) =>
-                  handleSustainOnBlur(value)
+                  handleNumberOnBlur(
+                    setVolumeEnvelopeSustain, // control setter function
+                    value, // current value
+                    1 // reset value (before the multiplier) if the input is empty
+                  )
                 }
               />
               <SliderTime
@@ -463,26 +291,30 @@ const VolumeEnvelope = () => {
                 multiplier={1000}
                 decimal={0}
                 onChange={({ target: { value } }) =>
-                  handleReleaseThrottled(value)
+                  handleSliderThrottled(
+                    volumeEnvelopeRelease, // control name
+                    setVolumeEnvelopeRelease, // control setter function
+                    value, // current value of the slider
+                    2 // slider power
+                  )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
-                  handleReleaseInput(value)
+                  handleNumberInput(
+                    volumeEnvelopeRelease, // control name
+                    setVolumeEnvelopeRelease, // control setter function
+                    value, // current value
+                    0.001, // value multiplier
+                    2 // slider power
+                  )
                 }
                 handleOnBlur={({ target: { value } }) =>
-                  handleReleaseOnBlur(value)
+                  handleNumberOnBlur(
+                    setVolumeEnvelopeRelease, // control setter function
+                    value, // current value
+                    0.001 // reset value (before the multiplier) if the input is empty
+                  )
                 }
               />
-              {/* <SliderTime
-                label={volumeEnvelopeRelease.label}
-                id={volumeEnvelopeRelease.id}
-                min={volumeEnvelopeRelease.min}
-                max={volumeEnvelopeRelease.max}
-                step={volumeEnvelopeRelease.step}
-                sliderValue={volumeEnvelopeRelease.sliderValue}
-                scaledValue={volumeEnvelopeRelease.scaledValue}
-                onChange={handleRelease}
-                // disabled={disabled}
-              /> */}
             </div>
           </div>
         </li>
