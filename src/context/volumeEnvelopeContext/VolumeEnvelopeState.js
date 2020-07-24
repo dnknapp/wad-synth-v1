@@ -15,7 +15,7 @@ const VolumeEnvelopeState = (props) => {
       id: 'volumeEnvelopeAttack',
       label: 'Attack',
       min: 0.001,
-      max: 10,
+      max: 9.999,
       step: 'any',
       sliderValue: 0.001, // What the slider visually displays
       scaledValue: 0.001, // Default output value. Updates may be scaled
@@ -24,7 +24,7 @@ const VolumeEnvelopeState = (props) => {
       id: 'volumeEnvelopeDecay',
       label: 'Decay',
       min: 0.001,
-      max: 10,
+      max: 9.999,
       step: 'any',
       sliderValue: 0.001, // What the slider visually displays
       scaledValue: 0.001, // Default output value. Updates may be scaled
@@ -32,9 +32,9 @@ const VolumeEnvelopeState = (props) => {
     volumeEnvelopeSustain: {
       id: 'volumeEnvelopeSustain',
       label: 'Sustain',
-      min: 0.001,
+      min: 0,
       max: 1,
-      step: 'any',
+      step: 0.01,
       sliderValue: 1, // What the slider visually displays
       scaledValue: 1, // Default output value. Updates may be scaled
     },
@@ -51,7 +51,7 @@ const VolumeEnvelopeState = (props) => {
       id: 'volumeEnvelopeRelease',
       label: 'Release',
       min: 0.001,
-      max: 10,
+      max: 9.999,
       step: 'any',
       sliderValue: 0.001, // What the slider visually displays
       scaledValue: 0.001, // Default output value. Updates may be scaled
