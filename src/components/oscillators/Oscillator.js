@@ -159,7 +159,7 @@ const Oscillator = ({ oscillator }) => {
       );
       detuneValue = invertedValue + updatedDetuneFineRef.current; // Add the value of the Coarse slider to the current value of the Fine slider. To get the updated state in an event handler we need to use a Ref, see above for the setup.
 
-      setOscillatorDetuneCoarse(id, value * 100, invertedValue, detuneValue);
+      setOscillatorDetuneCoarse(id, invertedValue, value * 100, detuneValue);
     } else if (value === '') {
       setOscillatorDetuneCoarse(
         id,
@@ -220,7 +220,7 @@ const Oscillator = ({ oscillator }) => {
       );
       detuneValue = invertedValue + updatedDetuneCoarseRef.current; // Add the value of the Fine slider to the current value of the Coarse slider. To get the updated state in an event handler we need to use a Ref, see above for the setup.
 
-      setOscillatorDetuneFine(id, value * 1, invertedValue, detuneValue);
+      setOscillatorDetuneFine(id, invertedValue, value * 1, detuneValue);
     } else if (value === '') {
       setOscillatorDetuneFine(
         id,
@@ -277,7 +277,7 @@ const Oscillator = ({ oscillator }) => {
         value * 0.01,
         1
       );
-      setOscillatorVolume(id, value * 0.01, invertedValue);
+      setOscillatorVolume(id, invertedValue, value * 0.01);
     } else if (value === '') {
       setOscillatorVolume(
         id,
