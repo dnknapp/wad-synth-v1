@@ -6,6 +6,7 @@ import throttle from 'lodash.throttle';
 import SliderTime from '../uiElements/SliderTime';
 import SliderLevel from '../uiElements/SliderLevel';
 import styles from './VolumeEnvelope.module.scss';
+import useParameterRef from '../../hooks/usePararmeterRef';
 
 const VolumeEnvelope = () => {
   const volumeEnvelopeContext = useContext(VolumeEnvelopeContext);
@@ -25,29 +26,23 @@ const VolumeEnvelope = () => {
   const oscillatorContext = useContext(OscillatorContext);
   const { notePlaying } = oscillatorContext;
 
-  // console.log(volumeEnvelopeAttack);
-  // console.log(volumeEnvelopeDecay);
-
   // const [release, setRelease] = useState('1');
 
-  // This functionality has been moved to Brain.js. Updates to the Oscillator/Wad only take effect if a note isn't playing
-  // But I'll keep this here for now, because I might like the visual indication that a slider doesn't function during playback
+  // Disable sliders while a note is playing
+  // This functionality has been moved to Brain.js and disabled. Updates to the Oscillator/Wad only take effect if a note isn't playing
+  // I'll keep this here for now, because I might like the visual indication that a slider doesn't function during playback
   // let disabled = notePlaying ? true : false;
 
-  // Convert the linear scale of the slider to a Power Scale, so that there's more detail in the low numbers
-  // let scale = scalePow()
-  //   .range([volumeEnvelopeAttack.min, volumeEnvelopeAttack.max])
-  //   .domain([volumeEnvelopeAttack.min, volumeEnvelopeAttack.max])
-  //   .exponent(3);
-
+  // Function to make sliders non-linear
+  // Ex. a slider with an exponent value of 2 or 3 gives more detail to lower numbers
   let newSliderScale;
   let scaledValue;
   let invertedValue;
+  // Scale the slider value
   const getScaledValue = (min, max, value, exponent) => {
     newSliderScale = scalePow()
       .range([min, max])
       .domain([min, max])
-      // .domain([0, 10])
       .exponent(exponent);
     return (scaledValue = newSliderScale(value));
   };
@@ -56,108 +51,63 @@ const VolumeEnvelope = () => {
     newSliderScale = scalePow()
       .range([min, max])
       .domain([min, max])
-      // .domain([0, 10])
       .exponent(exponent);
     return (invertedValue = newSliderScale.invert(value));
   };
 
-  // Store values with useRef, so that the event handlers can access the current state
-  // Attack State
-  // --- Create a Ref with the initial state (from a prop/context)
-  const updatedAttackRef = useRef(volumeEnvelopeAttack.scaledValue);
-  // Create a function to update the Ref. It is passed our updated value
-  const setUpdatedAttack = (updatedValue) => {
-    updatedAttackRef.current = updatedValue;
-  };
-  // --- Run the update function (and pass it the updated value) when the state changes
-  useEffect(() => {
-    setUpdatedAttack(volumeEnvelopeAttack.scaledValue);
-  }, [volumeEnvelopeAttack]);
+  // useParameterRef stores slider values in useRef, so that slider event handlers can access the current state
+  useParameterRef(volumeEnvelopeAttack); // attack state
+  useParameterRef(volumeEnvelopeDecay); // decay state
+  useParameterRef(volumeEnvelopeSustain); // sustain state
+  useParameterRef(volumeEnvelopeRelease); // release state
 
-  // Decay State
-  // --- Create a Ref with the initial state (from a prop/context)
-  const updatedDecayRef = useRef(volumeEnvelopeDecay.scaledValue);
-  // Create a function to update the Ref. It is passed our updated value
-  const setUpdatedDecay = (updatedValue) => {
-    updatedDecayRef.current = updatedValue;
-  };
-  // --- Run the update function (and pass it the updated value) when the state changes
-  useEffect(() => {
-    setUpdatedDecay(volumeEnvelopeDecay.scaledValue);
-  }, [volumeEnvelopeDecay]);
-
-  // Sustain State
-  // --- Create a Ref with the initial state (from a prop/context)
-  const updatedSustainRef = useRef(volumeEnvelopeSustain.scaledValue);
-  // Create a function to update the Ref. It is passed our updated value
-  const setUpdatedSustain = (updatedValue) => {
-    updatedSustainRef.current = updatedValue;
-  };
-  // --- Run the update function (and pass it the updated value) when the state changes
-  useEffect(() => {
-    setUpdatedSustain(volumeEnvelopeSustain.scaledValue);
-  }, [volumeEnvelopeSustain]);
-
-  // Release State
-  // --- Create a Ref with the initial state (from a prop/context)
-  const updatedReleaseRef = useRef(volumeEnvelopeRelease.scaledValue);
-  // Create a function to update the Ref. It is passed our updated value
-  const setUpdatedRelease = (updatedValue) => {
-    updatedReleaseRef.current = updatedValue;
-  };
-  // --- Run the update function (and pass it the updated value) when the state changes
-  useEffect(() => {
-    setUpdatedRelease(volumeEnvelopeRelease.scaledValue);
-  }, [volumeEnvelopeRelease]);
   // Event Handlers
-
+  // Slider
   const handleSliderThrottled = useRef(
     throttle(function handleSlider(
-      controlName,
-      controlSetter,
-      value,
-      sliderPower
+      parameterName, // ex. volumeEnvelopeAttack
+      parameterSetter, // ex. setVolumeEnvelopeAttack
+      value, // where the slider is set
+      sliderPower // 1 = linear; use 2 or 3 for fine tuning lower ranges
     ) {
       // let releaseValue;
-      getScaledValue(controlName.min, controlName.max, value, sliderPower);
-      controlSetter(Number(value), scaledValue);
-    },
-    50)
+      getScaledValue(parameterName.min, parameterName.max, value, sliderPower);
+      parameterSetter(Number(value), scaledValue);
+    }, 50)
   ).current;
-  // --- Release Number Input
-  // valueMultiplier: multiply value by .001 to get miliseconds
+  // Number Input
   const handleNumberInput = (
-    controlName,
-    controlSetter,
-    value,
-    valueMultiplier,
-    sliderPower
+    parameterName, // ex. volumeEnvelopeAttack
+    parameterSetter, // ex. setVolumeEnvelopeAttack
+    value, // what the number is
+    valueMultiplier, // ex. multiply value by .001 to get miliseconds
+    sliderPower // should be the same as in handleSliderThrottled
   ) => {
     if (
-      value * valueMultiplier <= controlName.max &&
-      value * valueMultiplier >= controlName.min &&
+      value * valueMultiplier <= parameterName.max &&
+      value * valueMultiplier >= parameterName.min &&
       value !== ''
     ) {
       getInvertedValue(
         // Invert the scale function to update the slider value
-        controlName.min,
-        controlName.max,
+        parameterName.min,
+        parameterName.max,
         value * valueMultiplier,
         sliderPower
       );
-      controlSetter(invertedValue, value * valueMultiplier);
+      parameterSetter(invertedValue, value * valueMultiplier);
     } else if (value === '') {
-      controlSetter('', '');
-    } else if (value * valueMultiplier > controlName.max) {
-      controlSetter(controlName.max, controlName.max);
-    } else if (value * valueMultiplier < controlName.min) {
-      controlSetter(controlName.min, controlName.min);
+      parameterSetter('', '');
+    } else if (value * valueMultiplier > parameterName.max) {
+      parameterSetter(parameterName.max, parameterName.max);
+    } else if (value * valueMultiplier < parameterName.min) {
+      parameterSetter(parameterName.min, parameterName.min);
     }
   };
-  const handleNumberOnBlur = (controlSetter, value, resetValue) => {
+  const handleNumberOnBlur = (parameterSetter, value, resetValue) => {
     if (value === '') {
-      controlSetter(
-        resetValue, // Set the value to 1 if the input is empty
+      parameterSetter(
+        resetValue, // should probably be the same as the default value. ex. set the Sustain to 100 if the input is empty
         resetValue
       );
     }
@@ -184,16 +134,16 @@ const VolumeEnvelope = () => {
                 decimal={0}
                 onChange={({ target: { value } }) =>
                   handleSliderThrottled(
-                    volumeEnvelopeAttack, // control name
-                    setVolumeEnvelopeAttack, // control setter function
+                    volumeEnvelopeAttack, // parameter name
+                    setVolumeEnvelopeAttack, // parameter setter function
                     value, // current value of the slider
                     2 // slider power
                   )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
                   handleNumberInput(
-                    volumeEnvelopeAttack, // control name
-                    setVolumeEnvelopeAttack, // control setter function
+                    volumeEnvelopeAttack, // parameter name
+                    setVolumeEnvelopeAttack, // parameter setter function
                     value, // current value
                     0.001, // value multiplier
                     2 // slider power
@@ -201,7 +151,7 @@ const VolumeEnvelope = () => {
                 }
                 handleOnBlur={({ target: { value } }) =>
                   handleNumberOnBlur(
-                    setVolumeEnvelopeAttack, // control setter function
+                    setVolumeEnvelopeAttack, // parameter setter function
                     value, // current value
                     0.001 // reset value (before the multiplier) if the input is empty
                   )
@@ -220,16 +170,16 @@ const VolumeEnvelope = () => {
                 decimal={0}
                 onChange={({ target: { value } }) =>
                   handleSliderThrottled(
-                    volumeEnvelopeDecay, // control name
-                    setVolumeEnvelopeDecay, // control setter function
+                    volumeEnvelopeDecay, // parameter name
+                    setVolumeEnvelopeDecay, // parameter setter function
                     value, // current value of the slider
                     2 // slider power
                   )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
                   handleNumberInput(
-                    volumeEnvelopeDecay, // control name
-                    setVolumeEnvelopeDecay, // control setter function
+                    volumeEnvelopeDecay, // parameter name
+                    setVolumeEnvelopeDecay, // parameter setter function
                     value, // current value
                     0.001, // value multiplier
                     2 // slider power
@@ -237,7 +187,7 @@ const VolumeEnvelope = () => {
                 }
                 handleOnBlur={({ target: { value } }) =>
                   handleNumberOnBlur(
-                    setVolumeEnvelopeDecay, // control setter function
+                    setVolumeEnvelopeDecay, // parameter setter function
                     value, // current value
                     0.001 // reset value (before the multiplier) if the input is empty
                   )
@@ -256,16 +206,16 @@ const VolumeEnvelope = () => {
                 decimal={0}
                 onChange={({ target: { value } }) =>
                   handleSliderThrottled(
-                    volumeEnvelopeSustain, // control name
-                    setVolumeEnvelopeSustain, // control setter function
+                    volumeEnvelopeSustain, // parameter name
+                    setVolumeEnvelopeSustain, // parameter setter function
                     value, // current value of the slider
                     1 // slider power
                   )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
                   handleNumberInput(
-                    volumeEnvelopeSustain, // control name
-                    setVolumeEnvelopeSustain, // control setter function
+                    volumeEnvelopeSustain, // parameter name
+                    setVolumeEnvelopeSustain, // parameter setter function
                     value, // current value
                     0.01, // value multiplier
                     1 // slider power
@@ -273,7 +223,7 @@ const VolumeEnvelope = () => {
                 }
                 handleOnBlur={({ target: { value } }) =>
                   handleNumberOnBlur(
-                    setVolumeEnvelopeSustain, // control setter function
+                    setVolumeEnvelopeSustain, // parameter setter function
                     value, // current value
                     1 // reset value (before the multiplier) if the input is empty
                   )
@@ -292,16 +242,16 @@ const VolumeEnvelope = () => {
                 decimal={0}
                 onChange={({ target: { value } }) =>
                   handleSliderThrottled(
-                    volumeEnvelopeRelease, // control name
-                    setVolumeEnvelopeRelease, // control setter function
+                    volumeEnvelopeRelease, // parameter name
+                    setVolumeEnvelopeRelease, // parameter setter function
                     value, // current value of the slider
                     2 // slider power
                   )
                 } // Destructuring e.target.value
                 handleNumberInput={({ target: { value } }) =>
                   handleNumberInput(
-                    volumeEnvelopeRelease, // control name
-                    setVolumeEnvelopeRelease, // control setter function
+                    volumeEnvelopeRelease, // parameter name
+                    setVolumeEnvelopeRelease, // parameter setter function
                     value, // current value
                     0.001, // value multiplier
                     2 // slider power
@@ -309,7 +259,7 @@ const VolumeEnvelope = () => {
                 }
                 handleOnBlur={({ target: { value } }) =>
                   handleNumberOnBlur(
-                    setVolumeEnvelopeRelease, // control setter function
+                    setVolumeEnvelopeRelease, // parameter setter function
                     value, // current value
                     0.001 // reset value (before the multiplier) if the input is empty
                   )
