@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import VolumeEnvelopeContext from '../../context/volumeEnvelopeContext/volumeEnvelopeContext';
 import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
-import { scalePow } from 'd3-scale';
 import throttle from 'lodash.throttle';
 import SliderTime from '../uiElements/SliderTime';
 import SliderLevel from '../uiElements/SliderLevel';
 import styles from './VolumeEnvelope.module.scss';
 import useParameterRef from '../../hooks/usePararmeterRef';
+import getScaledValue, { scaledValue } from '../../utils/getScaledValue';
+import getInvertedValue, { invertedValue } from '../../utils/getInvertedValue';
 
 const VolumeEnvelope = () => {
   const volumeEnvelopeContext = useContext(VolumeEnvelopeContext);
@@ -33,28 +34,6 @@ const VolumeEnvelope = () => {
   // I'll keep this here for now, because I might like the visual indication that a slider doesn't function during playback
   // let disabled = notePlaying ? true : false;
 
-  // Function to make sliders non-linear
-  // Ex. a slider with an exponent value of 2 or 3 gives more detail to lower numbers
-  let newSliderScale;
-  let scaledValue;
-  let invertedValue;
-  // Scale the slider value
-  const getScaledValue = (min, max, value, exponent) => {
-    newSliderScale = scalePow()
-      .range([min, max])
-      .domain([min, max])
-      .exponent(exponent);
-    return (scaledValue = newSliderScale(value));
-  };
-  // Invert the scale of the number input
-  const getInvertedValue = (min, max, value, exponent) => {
-    newSliderScale = scalePow()
-      .range([min, max])
-      .domain([min, max])
-      .exponent(exponent);
-    return (invertedValue = newSliderScale.invert(value));
-  };
-
   // useParameterRef stores slider values in useRef, so that slider event handlers can access the current state
   useParameterRef(volumeEnvelopeAttack); // attack state
   useParameterRef(volumeEnvelopeDecay); // decay state
@@ -71,8 +50,8 @@ const VolumeEnvelope = () => {
       sliderPower // 1 = linear; use 2 or 3 for fine tuning lower ranges
     ) {
       // let releaseValue;
-      getScaledValue(parameterName.min, parameterName.max, value, sliderPower);
-      parameterSetter(Number(value), scaledValue);
+      getScaledValue(parameterName.min, parameterName.max, value, sliderPower); // Function to make the slider non-linear
+      parameterSetter(Number(value), scaledValue); // ex. setVolumeEnvelopeAttack updates v olumeEnvelopeAttack in the Context
     }, 50)
   ).current;
   // Number Input
@@ -84,6 +63,7 @@ const VolumeEnvelope = () => {
     sliderPower // should be the same as in handleSliderThrottled
   ) => {
     if (
+      // If the number input is in the correct range, update the value
       value * valueMultiplier <= parameterName.max &&
       value * valueMultiplier >= parameterName.min &&
       value !== ''
@@ -95,17 +75,21 @@ const VolumeEnvelope = () => {
         value * valueMultiplier,
         sliderPower
       );
-      parameterSetter(invertedValue, value * valueMultiplier);
+      parameterSetter(invertedValue, value * valueMultiplier); // ex. setVolumeEnvelopeAttack updates v olumeEnvelopeAttack in the Context
     } else if (value === '') {
+      // If the user deletes the numbers in the input, set an empty string
       parameterSetter('', '');
     } else if (value * valueMultiplier > parameterName.max) {
+      // If the number input value is greater than the max, set it to the max
       parameterSetter(parameterName.max, parameterName.max);
     } else if (value * valueMultiplier < parameterName.min) {
+      // If the number input value is less than the min, set it to the min
       parameterSetter(parameterName.min, parameterName.min);
     }
   };
   const handleNumberOnBlur = (parameterSetter, value, resetValue) => {
     if (value === '') {
+      // If the user clicks out of the number input while it's empty, set the value to the default
       parameterSetter(
         resetValue, // should probably be the same as the default value. ex. set the Sustain to 100 if the input is empty
         resetValue
