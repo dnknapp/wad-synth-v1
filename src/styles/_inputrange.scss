@@ -37,13 +37,16 @@ input[type='range']::-webkit-slider-thumb {
   height: calcRem(30);
   width: calcRem(11);
   border-radius: 2px;
-  background: $color-dodger;
-  border-left: 2px solid $color-cobalt;
-  border-right: 2px solid $color-cobalt;
+  background: $color-cobalt;
+  background: linear-gradient(90deg, $color-dodger 50%, $color-cobalt 50%);
+  // border-left: 2px solid $color-cobalt;
+  // border-right: 2px solid $color-cobalt;
+  // border-left: 2px solid $color-shark;
+  // border-right: 2px solid $color-shark;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: calcRem(-13);
-  box-shadow: 0 0 3px $color-dodger;
+  box-shadow: 0 2px 2px $color-shark30;
 }
 
 // Firefox
@@ -65,13 +68,15 @@ input[type='range']::-moz-range-thumb {
   height: calcRem(30);
   width: calcRem(11);
   border-radius: 2px;
-  background: $color-dodger;
-  border-left: 2px solid $color-cobalt;
-  border-right: 2px solid $color-cobalt;
+  // background: $color-dodger;
+  // border-left: 2px solid $color-cobalt;
+  // border-right: 2px solid $color-cobalt;
+  background: $color-cobalt;
+  background: linear-gradient(90deg, $color-dodger 50%, $color-cobalt 50%);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: calcRem(-13);
-  box-shadow: 0 0 3px $color-dodger;
+  box-shadow: 0 2px 2px $color-shark30;
 }
 
 .rangeTickmarksContainer {
@@ -96,40 +101,58 @@ input[type='range']::-moz-range-thumb {
 // Slider colors. These need to be here because to work they can't be namespaced by the scss modules
 .semitone {
   input[type='range']::-webkit-slider-thumb {
-    background-color: $color-dodger;
-    border-color: $color-cobalt;
-    box-shadow: 0 0 3px $color-dodger;
+    // background-color: $color-dodger;
+    // border-color: $color-cobalt;
+    background: $color-cobalt;
+    background: linear-gradient(90deg, $color-dodger 50%, $color-cobalt 50%);
+    // border-color: $color-shark;
+    box-shadow: 0 2px 2px $color-shark30;
   }
   input[type='range']::-moz-range-thumb {
-    background-color: $color-dodger;
-    border-color: $color-cobalt;
-    box-shadow: 0 0 3px $color-dodger;
+    // background-color: $color-dodger;
+    // border-color: $color-cobalt;
+    background: $color-cobalt;
+    background: linear-gradient(90deg, $color-dodger 50%, $color-cobalt 50%);
+    // border-color: $color-shark;
+    box-shadow: 0 2px 2px $color-shark30;
   }
 }
 
 .detune {
   input[type='range']::-webkit-slider-thumb {
-    background-color: $color-jaffa;
-    border-color: $color-beech;
-    box-shadow: 0 0 3px $color-jaffa;
+    // background-color: $color-jaffa;
+    // border-color: $color-beech;
+    background: $color-beech;
+    background: linear-gradient(90deg, $color-jaffa 50%, $color-beech 50%);
+    // border-color: $color-shark;
+    box-shadow: 0 2px 2px $color-shark30;
   }
   input[type='range']::-moz-range-thumb {
-    background-color: $color-jaffa;
-    border-color: $color-beech;
-    box-shadow: 0 0 3px $color-jaffa;
+    // background-color: $color-jaffa;
+    // border-color: $color-beech;
+    background: $color-beech;
+    background: linear-gradient(90deg, $color-jaffa 50%, $color-beech 50%);
+    // border-color: $color-shark;
+    box-shadow: 0 2px 2px $color-shark30;
   }
 }
 
 .volume {
   input[type='range']::-webkit-slider-thumb {
-    background-color: $color-shamrock;
-    border-color: $color-sap;
-    box-shadow: 0 0 3px $color-shamrock;
+    // background-color: $color-shamrock;
+    // border-color: $color-sap;
+    // border-color: $color-shark;
+    background: $color-sap;
+    background: linear-gradient(90deg, $color-shamrock 50%, $color-sap 50%);
+    box-shadow: 0 2px 2px $color-shark30;
   }
   input[type='range']::-moz-range-thumb {
-    background-color: $color-shamrock;
-    border-color: $color-sap;
-    box-shadow: 0 0 3px $color-shamrock;
+    // background-color: $color-shamrock;
+    // border-color: $color-sap;
+    // border-color: $color-shark;
+    background: $color-sap;
+    background: linear-gradient(90deg, $color-shamrock 50%, $color-sap 50%);
+    box-shadow: 0 2px 2px $color-shark30;
   }
 }
 // input[type='range']::-webkit-slider-thumb

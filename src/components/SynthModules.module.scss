@@ -3,6 +3,7 @@
 
 .mainContainer {
   display: grid;
+  width: calc(100% - 3rem);
   grid-template-columns: 1fr;
   gap: 0.75rem;
   align-items: start;

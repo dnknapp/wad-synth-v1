@@ -35,6 +35,9 @@ $color-lcd-green: hsla(119, 75, 45, 1); // #1FC71D
 
 // Element outlines, backgrounds, text
 $color-shark: hsla(220, 12, 16, 1); // #24272E
+$color-shark30: hsla(220, 12, 16, 0.3); // Slider shadows
+
+$color-malibu: hsla(220, 100, 73, 1); // #78a5ff active buttons
 
 // Blue Module
 $color-azure100: hsla(205, 100, 47, 1); //#008CF0
@@ -48,16 +51,16 @@ $color-sky10: hsla(200, 80, 66, 0.1);
 
 // Design V2
 // Blue
-$color-dodger: hsla(212, 100, 65, 1); // #4DA0FF
-$color-cobalt: hsla(212, 100, 31, 1); // #004AA0
+$color-dodger: hsla(202, 68, 54, 1); // #399FDA
+$color-cobalt: hsla(202, 72, 45, 1); // #2089C6
 
 // Orange
-$color-jaffa: hsla(20, 91, 61, 1); // #F67D40
-$color-beech: hsla(20, 100, 26, 1); // #872D00
+$color-jaffa: hsla(22, 76, 53, 1); // #E3702E
+$color-beech: hsla(22, 79, 45, 1); // #CD5B18
 
 // Green
-$color-shamrock: hsla(146, 71, 57, 1); // #45DF88
-$color-sap: hsla(146, 100, 22, 1); // #006F30
+$color-shamrock: hsla(150, 60, 48, 1); // #31C47B
+$color-sap: hsla(150, 77, 38, 1); // #16AD61
 
 // Yellow
 $color-tahuna: hsla(61, 56, 86, 1); // #EEEFC6 "screens"/mono-spaced fonts

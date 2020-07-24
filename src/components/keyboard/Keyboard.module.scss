@@ -8,7 +8,7 @@
   left: 0;
   padding: 0;
   background: $color-shark;
-  border-top: 3px solid $color-sky100;
+  border-top: 3px solid $color-catskill;
   z-index: 1;
 }
 
@@ -41,8 +41,8 @@
 .whiteKey {
   top: calcRem(48); // Offsetting the top by the height of the black keys
   height: calcRem(52);
-  border-radius: 0 0 $radius-pill $radius-pill;
-  background: $color-sky100;
+  border-radius: 0 0 $radius-small $radius-small;
+  background: $color-catskill;
   margin-left: -2rem;
   color: $color-shark;
   text-align: center;
@@ -52,8 +52,8 @@
   height: calcRem(48);
   left: -1rem;
   background: $color-shark;
-  border-radius: $radius-pill $radius-pill 0 0;
-  color: $color-sky100;
+  border-radius: $radius-small $radius-small 0 0;
+  color: $color-catskill;
   text-align: center;
   // This cannot have a z-index for ::before to go behind it
 }
@@ -72,7 +72,7 @@
     height: calcRem(52);
     top: -0.25rem;
     left: -0.25rem;
-    background: $color-sky100;
+    background: $color-catskill;
     border-radius: $radius-medium $radius-medium 0 0;
     z-index: -1;
   }

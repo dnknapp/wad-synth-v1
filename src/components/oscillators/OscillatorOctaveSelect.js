@@ -31,6 +31,7 @@ const OscillatorOctaveSelect = ({ id, handleSelectOctave, octaveSelected }) => {
       <div className={`selectButtonGroup`}>
         {octaves.map(({ value, text }, index) => (
           <Fragment key={index}>
+            {/* TODO: Change these to buttons so that keyboard navigation is better */}
             <input
               type="radio"
               id={`${id}${value}`}

@@ -26,7 +26,7 @@ const SliderLevel = ({
       id={id}
       className={`labelLayout ${label}`}
     >
-      {label}
+      <span className={`pb5`}>{label}</span>
       <div className={`rangeContainer`}>
         <input
           type="range"
