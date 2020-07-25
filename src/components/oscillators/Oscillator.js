@@ -14,6 +14,7 @@ import OscillatorWaveSelect from './OscillatorWaveSelect';
 import OscillatorOctaveSelect from './OscillatorOctaveSelect';
 import SliderTime from '../uiElements/SliderTime';
 import SliderLevel from '../uiElements/SliderLevel';
+import Slider from '../uiElements/Slider';
 
 const Oscillator = ({ oscillator }) => {
   const oscillatorContext = useContext(OscillatorContext);
@@ -327,7 +328,7 @@ const Oscillator = ({ oscillator }) => {
           octaveSelected={octaveSelected}
         />
 
-        <SliderLevel
+        <Slider
           label={detuneControlCoarse.label}
           id={detuneControlCoarse.id}
           min={detuneControlCoarse.min}
@@ -348,7 +349,7 @@ const Oscillator = ({ oscillator }) => {
           }
           // disabled={disabled}
         />
-        <SliderLevel
+        <Slider
           label={detuneControlFine.label}
           id={detuneControlFine.id}
           min={detuneControlFine.min}
@@ -368,7 +369,7 @@ const Oscillator = ({ oscillator }) => {
           // disabled={disabled}
         />
 
-        <SliderLevel
+        <Slider
           label={volumeControl.label}
           id={volumeControl.id}
           min={volumeControl.min}
