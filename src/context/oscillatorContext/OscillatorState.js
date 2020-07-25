@@ -9,6 +9,7 @@ import {
   SET_OSCILLATOR_OCTAVE,
   SET_OSCILLATOR_DETUNE_COARSE,
   SET_OSCILLATOR_DETUNE_FINE,
+  SET_OSCILLATOR_DETUNE,
   SET_NOTE_PITCH,
   SET_NOTE_PLAYING,
   SET_NOTE_VOLUME,
@@ -114,25 +115,27 @@ const OscillatorState = (props) => {
   const setOscillatorDetuneCoarse = (
     oscillatorId,
     sliderValue,
-    scaledValue,
-    detuneValue
+    scaledValue
   ) => {
     dispatch({
       type: SET_OSCILLATOR_DETUNE_COARSE,
-      payload: { oscillatorId, sliderValue, scaledValue, detuneValue },
+      payload: { oscillatorId, sliderValue, scaledValue },
     });
   };
 
   // Set the fine detune amount - moves pitch by cents
-  const setOscillatorDetuneFine = (
-    oscillatorId,
-    sliderValue,
-    scaledValue,
-    detuneValue
-  ) => {
+  const setOscillatorDetuneFine = (oscillatorId, sliderValue, scaledValue) => {
     dispatch({
       type: SET_OSCILLATOR_DETUNE_FINE,
-      payload: { oscillatorId, sliderValue, scaledValue, detuneValue },
+      payload: { oscillatorId, sliderValue, scaledValue },
+    });
+  };
+
+  // Set the combined fine and coarse detune amount; what you actually hear
+  const setOscillatorDetune = (oscillatorId, detuneValue) => {
+    dispatch({
+      type: SET_OSCILLATOR_DETUNE,
+      payload: { oscillatorId, detuneValue },
     });
   };
 
@@ -162,6 +165,7 @@ const OscillatorState = (props) => {
         setOscillatorOctave,
         setOscillatorDetuneCoarse,
         setOscillatorDetuneFine,
+        setOscillatorDetune,
         setNotePitch,
         setNotePlaying,
         setNoteVolume,

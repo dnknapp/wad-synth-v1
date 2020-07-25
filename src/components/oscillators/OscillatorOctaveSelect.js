@@ -1,7 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
+import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
 import styles from './OscillatorOctaveSelect.module.scss';
 
-const OscillatorOctaveSelect = ({ id, handleSelectOctave, octaveSelected }) => {
+const OscillatorOctaveSelect = ({ id }) => {
+  const oscillatorContext = useContext(OscillatorContext);
+  const { setOscillatorOctave } = oscillatorContext;
+
+  // Transpose the pitch for different octave settings
   const octaves = [
     {
       value: 'octaveMinus2',
@@ -24,6 +29,31 @@ const OscillatorOctaveSelect = ({ id, handleSelectOctave, octaveSelected }) => {
       text: '+2',
     },
   ];
+
+  const [octaveSelected, setOctaveSelected] = useState('octave0');
+
+  const handleSelectOctave = (e) => {
+    setOctaveSelected(e.target.value);
+    switch (e.target.value) {
+      case 'octaveMinus2':
+        setOscillatorOctave(id, 0.25);
+        break;
+      case 'octaveMinus1':
+        setOscillatorOctave(id, 0.5);
+        break;
+      case 'octave0':
+        setOscillatorOctave(id, 1);
+        break;
+      case 'octavePlus1':
+        setOscillatorOctave(id, 2);
+        break;
+      case 'octavePlus2':
+        setOscillatorOctave(id, 4);
+        break;
+      default:
+      //
+    }
+  };
 
   return (
     <Fragment>

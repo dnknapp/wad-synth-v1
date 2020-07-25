@@ -6,6 +6,7 @@ import {
   SET_OSCILLATOR_OCTAVE,
   SET_OSCILLATOR_DETUNE_COARSE,
   SET_OSCILLATOR_DETUNE_FINE,
+  SET_OSCILLATOR_DETUNE,
   SET_NOTE_PITCH,
   SET_NOTE_PLAYING,
   SET_NOTE_VOLUME,
@@ -78,7 +79,6 @@ export default (state, action) => {
           oscillator.id === action.payload.oscillatorId
             ? {
                 ...oscillator,
-                detune: action.payload.detuneValue,
                 detuneControlCoarse: {
                   ...oscillator.detuneControlCoarse,
                   sliderValue: action.payload.sliderValue,
@@ -95,12 +95,23 @@ export default (state, action) => {
           oscillator.id === action.payload.oscillatorId
             ? {
                 ...oscillator,
-                detune: action.payload.detuneValue,
                 detuneControlFine: {
                   ...oscillator.detuneControlFine,
                   sliderValue: action.payload.sliderValue,
                   scaledValue: action.payload.scaledValue,
                 },
+              }
+            : oscillator
+        ),
+      };
+    case SET_OSCILLATOR_DETUNE:
+      return {
+        ...state,
+        oscillators: state.oscillators.map((oscillator) =>
+          oscillator.id === action.payload.oscillatorId
+            ? {
+                ...oscillator,
+                detune: action.payload.detuneValue,
               }
             : oscillator
         ),
