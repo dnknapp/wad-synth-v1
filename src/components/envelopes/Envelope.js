@@ -13,6 +13,7 @@ const Envelope = ({ envelope }) => {
 
   const {
     id,
+    legend,
     envelopeAttack,
     envelopeDecay,
     envelopeSustain,
@@ -54,7 +55,7 @@ const Envelope = ({ envelope }) => {
     <div className={`synthModuleInner`}>
       <h3 className={`synthModuleSidebar`}>
         <span className={`displaySub block`}>Env</span>{' '}
-        <span className={`display block`}>{/* {oscillator.legend} */}</span>
+        <span className={`display block`}>{legend}</span>
       </h3>
       <div className={`synthModuleControls`}>
         {parameters.map(
@@ -63,7 +64,8 @@ const Envelope = ({ envelope }) => {
               {/* {console.log(paramName, setter, multiplier, power)} */}
               <SliderNew
                 label={paramName.label}
-                id={paramName.id}
+                moduleId={id}
+                paramId={paramName.id}
                 min={paramName.min}
                 max={paramName.max}
                 step={paramName.step}

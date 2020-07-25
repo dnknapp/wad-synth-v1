@@ -1,21 +1,25 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import Wad from 'web-audio-daw';
 import OscillatorContext from '../context/oscillatorContext/oscillatorContext';
-import VolumeEnvelopeContext from '../context/volumeEnvelopeContext/volumeEnvelopeContext';
+// import VolumeEnvelopeContext from '../context/volumeEnvelopeContext/volumeEnvelopeContext';
+import EnvelopeContext from '../context/envelopeContext/envelopeContext';
 // import Oscillator from './Oscillator';
 
 const Oscillators = () => {
   const oscillatorContext = useContext(OscillatorContext);
   const { oscillators, notePlaying, notePitch, noteVolume } = oscillatorContext;
 
-  const volumeEnvelopeContext = useContext(VolumeEnvelopeContext);
-  const {
-    volumeEnvelopeAttack,
-    volumeEnvelopeDecay,
-    volumeEnvelopeSustain,
-    volumeEnvelopeHold,
-    volumeEnvelopeRelease,
-  } = volumeEnvelopeContext;
+  // const volumeEnvelopeContext = useContext(VolumeEnvelopeContext);
+  // const {
+  //   volumeEnvelopeAttack,
+  //   volumeEnvelopeDecay,
+  //   volumeEnvelopeSustain,
+  //   volumeEnvelopeHold,
+  //   volumeEnvelopeRelease,
+  // } = volumeEnvelopeContext;
+
+  const envelopeContext = useContext(EnvelopeContext);
+  const { envelopes } = envelopeContext;
 
   const [componentLoading, setComponentLoading] = useState(true);
 
@@ -47,11 +51,11 @@ const Oscillators = () => {
     // pitch: notePitch,
     label: notePitch,
     env: {
-      attack: volumeEnvelopeAttack.scaledValue,
-      decay: volumeEnvelopeDecay.scaledValue,
-      sustain: volumeEnvelopeSustain.scaledValue,
-      hold: volumeEnvelopeHold,
-      release: volumeEnvelopeRelease.scaledValue,
+      attack: envelopes[0].envelopeAttack.scaledValue,
+      decay: envelopes[0].envelopeDecay.scaledValue,
+      sustain: envelopes[0].envelopeSustain.scaledValue,
+      hold: envelopes[0].envelopeHold,
+      release: envelopes[0].envelopeRelease.scaledValue,
     },
   };
 

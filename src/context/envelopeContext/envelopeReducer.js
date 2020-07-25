@@ -16,7 +16,7 @@ export default (state, action) => {
             ? {
                 ...envelope,
                 envelopeAttack: {
-                  ...state.envelopeAttack,
+                  ...envelope.envelopeAttack,
                   sliderValue: action.payload.sliderValue,
                   scaledValue: action.payload.scaledValue,
                 },
@@ -32,7 +32,7 @@ export default (state, action) => {
             ? {
                 ...envelope,
                 envelopeDecay: {
-                  ...state.envelopeDecay,
+                  ...envelope.envelopeDecay,
                   sliderValue: action.payload.sliderValue,
                   scaledValue: action.payload.scaledValue,
                 },
@@ -49,7 +49,7 @@ export default (state, action) => {
             ? {
                 ...envelope,
                 envelopeSustain: {
-                  ...state.envelopeSustain,
+                  ...envelope.envelopeSustain,
                   sliderValue: action.payload.sliderValue,
                   scaledValue: action.payload.scaledValue,
                 },
@@ -75,7 +75,7 @@ export default (state, action) => {
             ? {
                 ...envelope,
                 envelopeRelease: {
-                  ...state.envelopeRelease,
+                  ...envelope.envelopeRelease,
                   sliderValue: action.payload.sliderValue,
                   scaledValue: action.payload.scaledValue,
                 },

@@ -10,7 +10,7 @@ import {
 } from './envelopeTypes';
 
 const EnvelopeState = (props) => {
-  const envNums = ['1']; // Envelope numbers
+  const envNums = ['1', '2']; // Envelope numbers
   const initialState = {
     envelopes: [],
   };
@@ -21,7 +21,7 @@ const EnvelopeState = (props) => {
         id: `env${num}`,
         legend: `${num}`,
         envelopeAttack: {
-          id: 'envelopeAttack',
+          id: `env${num}Attack`,
           label: 'Attack',
           min: 0.001,
           max: 9.999,
@@ -30,7 +30,7 @@ const EnvelopeState = (props) => {
           scaledValue: 0.001, // Default output value. Updates may be scaled
         },
         envelopeDecay: {
-          id: 'envelopeDecay',
+          id: `env${num}Decay`,
           label: 'Decay',
           min: 0.001,
           max: 9.999,
@@ -39,7 +39,7 @@ const EnvelopeState = (props) => {
           scaledValue: 0.001, // Default output value. Updates may be scaled
         },
         envelopeSustain: {
-          id: 'envelopeSustain',
+          id: `env${num}Sustain`,
           label: 'Sustain',
           min: 0,
           max: 1,
@@ -48,7 +48,7 @@ const EnvelopeState = (props) => {
           scaledValue: 1, // Default output value. Updates may be scaled
         },
         envelopeRelease: {
-          id: 'envelopeRelease',
+          id: `env${num}Release`,
           label: 'Release',
           min: 0.001,
           max: 9.999,

@@ -7,7 +7,8 @@ import getInvertedValue, {
 
 const SliderNew = ({
   label,
-  id,
+  moduleId,
+  paramId,
   min,
   max,
   step,
@@ -28,7 +29,7 @@ const SliderNew = ({
       value // where the slider is set
     ) {
       getScaledValue(paramName.min, paramName.max, value, power); // Function to make the slider non-linear
-      paramSetter(Number(value), d3ScaledValue); // ex. setVolumeEnvelopeAttack updates volumeEnvelopeAttack in the Context
+      paramSetter(moduleId, Number(value), d3ScaledValue); // ex. setVolumeEnvelopeAttack updates volumeEnvelopeAttack in the Context
     }, 50)
   ).current;
   // Number Input
@@ -48,16 +49,16 @@ const SliderNew = ({
         value * (1 / multiplier),
         power
       );
-      paramSetter(d3InvertedValue, value * (1 / multiplier)); // ex. setVolumeEnvelopeAttack updates v olumeEnvelopeAttack in the Context
+      paramSetter(moduleId, d3InvertedValue, value * (1 / multiplier)); // ex. setVolumeEnvelopeAttack updates v olumeEnvelopeAttack in the Context
     } else if (value === '') {
       // If the user deletes the numbers in the input, set an empty string
-      paramSetter('', '');
+      paramSetter(moduleId, '', '');
     } else if (value * (1 / multiplier) > paramName.max) {
       // If the number input value is greater than the max, set it to the max
-      paramSetter(paramName.max, paramName.max);
+      paramSetter(moduleId, paramName.max, paramName.max);
     } else if (value * (1 / multiplier) < paramName.min) {
       // If the number input value is less than the min, set it to the min
-      paramSetter(paramName.min, paramName.min);
+      paramSetter(moduleId, paramName.min, paramName.min);
     }
   };
   const handleNumberOnBlur = (value, resetValue) => {
@@ -65,6 +66,7 @@ const SliderNew = ({
       // If the user clicks out of the number input while it's empty, set the value to the default
       paramSetter(
         // TODO: add a default reset value to the Context
+        moduleId,
         resetValue, // should probably be the same as the default value. ex. set the Sustain to 100 if the input is empty
         resetValue
       );
@@ -74,15 +76,15 @@ const SliderNew = ({
   return (
     <label
       // htmlFor={id}
-      id={id}
+      id={paramId}
       className={`labelLayout ${label}`}
     >
       <span className={`pb5`}>{label}</span>
       <div className={`rangeContainer`}>
         <input
           type="range"
-          id={`${id}Range`}
-          name={`${id}Range`}
+          id={`${paramId}Range`}
+          name={`${paramId}Range`}
           min={min}
           max={max}
           step={step}
@@ -93,7 +95,7 @@ const SliderNew = ({
             )
           }
           // disabled={disabled} // Most sliders need to be disabled while a note is playing
-          aria-labelledby={id}
+          aria-labelledby={paramId}
         />
         <div className={`rangeTickmarksContainer`}>
           <div className={`rangeTickmark`}></div>
@@ -105,8 +107,8 @@ const SliderNew = ({
       </div>
       <input
         type="number"
-        id={`${id}Number`}
-        name={`${id}Number`}
+        id={`${paramId}Number`}
+        name={`${paramId}Number`}
         min={min * multiplier}
         max={max * multiplier}
         step={isNaN(step) ? step : step * multiplier} // if step is not "any", multiply the step by the multiplier
@@ -126,7 +128,7 @@ const SliderNew = ({
         }
         // readOnly
         // disabled={disabled} // Most sliders need to be disabled while a note is playing
-        aria-labelledby={id}
+        aria-labelledby={paramId}
       />
       {unit}
     </label>
