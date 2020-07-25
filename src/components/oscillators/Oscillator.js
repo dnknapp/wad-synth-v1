@@ -328,7 +328,7 @@ const Oscillator = ({ oscillator }) => {
           octaveSelected={octaveSelected}
         />
 
-        <Slider
+        <SliderLevel
           label={detuneControlCoarse.label}
           id={detuneControlCoarse.id}
           min={detuneControlCoarse.min}
@@ -349,7 +349,7 @@ const Oscillator = ({ oscillator }) => {
           }
           // disabled={disabled}
         />
-        <Slider
+        <SliderLevel
           label={detuneControlFine.label}
           id={detuneControlFine.id}
           min={detuneControlFine.min}
@@ -369,7 +369,7 @@ const Oscillator = ({ oscillator }) => {
           // disabled={disabled}
         />
 
-        <Slider
+        <SliderLevel
           label={volumeControl.label}
           id={volumeControl.id}
           min={volumeControl.min}
