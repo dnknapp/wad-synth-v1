@@ -3,6 +3,7 @@ import './App.scss';
 // State/Context
 import OscillatorState from './context/oscillatorContext/OscillatorState';
 import VolumeEnvelopeState from './context/volumeEnvelopeContext/VolumeEnvelopeState';
+import EnvelopeState from './context/envelopeContext/EnvelopeState';
 //Components
 import Brain from './components/Brain'; // Where Wads are constructed
 import SynthModules from './components/SynthModules';
@@ -13,10 +14,13 @@ import SynthModules from './components/SynthModules';
 function App() {
   return (
     <OscillatorState>
-      <VolumeEnvelopeState>
-        <Brain />
-        <SynthModules />
-      </VolumeEnvelopeState>
+      <EnvelopeState>
+        {/* TODO: delete VolumeEnvelopeState once EnvelopeState works correctly */}
+        <VolumeEnvelopeState>
+          <Brain />
+          <SynthModules />
+        </VolumeEnvelopeState>
+      </EnvelopeState>
     </OscillatorState>
   );
 }

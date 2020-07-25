@@ -1,3 +1,4 @@
+// NOTE: This functionality has been moved to Envelope.js. Keep this file for reference of older code.
 import React, { Fragment, useContext, useRef } from 'react';
 import VolumeEnvelopeContext from '../../context/volumeEnvelopeContext/volumeEnvelopeContext';
 import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
