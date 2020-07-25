@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { Fragment, useContext, useRef } from 'react';
+import throttle from 'lodash.throttle';
+import getScaledValue, { d3ScaledValue } from '../../utils/getScaledValue';
+import getInvertedValue, {
+  d3InvertedValue,
+} from '../../utils/getInvertedValue';
 
 const Slider = ({
   label,
@@ -8,17 +13,63 @@ const Slider = ({
   step,
   sliderValue,
   scaledValue,
-  onChange,
-  handleNumberInput,
-  handleOnBlur,
   disabled,
   multiplier,
   decimal,
   unit,
+  paramName,
+  paramSetter,
+  power,
 }) => {
-  // console.log(min);
-  // console.log(max);
-  // console.log(step);
+  // Event Handlers
+  // Slider
+  const handleSliderThrottled = useRef(
+    throttle(function handleSlider(
+      value // where the slider is set
+    ) {
+      getScaledValue(paramName.min, paramName.max, value, power); // Function to make the slider non-linear
+      paramSetter(Number(value), d3ScaledValue); // ex. setVolumeEnvelopeAttack updates volumeEnvelopeAttack in the Context
+    }, 50)
+  ).current;
+  // Number Input
+  const handleNumberInput = (
+    value // what the number is
+  ) => {
+    if (
+      // If the number input is in the correct range, update the value
+      value * (1 / multiplier) <= paramName.max &&
+      value * (1 / multiplier) >= paramName.min &&
+      value !== ''
+    ) {
+      getInvertedValue(
+        // Invert the scale function to update the slider value
+        paramName.min,
+        paramName.max,
+        value * (1 / multiplier),
+        power
+      );
+      paramSetter(d3InvertedValue, value * (1 / multiplier)); // ex. setVolumeEnvelopeAttack updates v olumeEnvelopeAttack in the Context
+    } else if (value === '') {
+      // If the user deletes the numbers in the input, set an empty string
+      paramSetter('', '');
+    } else if (value * (1 / multiplier) > paramName.max) {
+      // If the number input value is greater than the max, set it to the max
+      paramSetter(paramName.max, paramName.max);
+    } else if (value * (1 / multiplier) < paramName.min) {
+      // If the number input value is less than the min, set it to the min
+      paramSetter(paramName.min, paramName.min);
+    }
+  };
+  const handleNumberOnBlur = (value, resetValue) => {
+    if (value === '') {
+      // If the user clicks out of the number input while it's empty, set the value to the default
+      paramSetter(
+        // TODO: add a default reset value to the Context
+        resetValue, // should probably be the same as the default value. ex. set the Sustain to 100 if the input is empty
+        resetValue
+      );
+    }
+  };
 
   return (
     <label
@@ -36,7 +87,11 @@ const Slider = ({
           max={max}
           step={step}
           value={sliderValue}
-          onChange={onChange}
+          onChange={({ target: { value } }) =>
+            handleSliderThrottled(
+              value // current value of the slider
+            )
+          }
           // disabled={disabled} // Most sliders need to be disabled while a note is playing
           aria-labelledby={id}
         />
@@ -48,7 +103,6 @@ const Slider = ({
           <div className={`rangeTickmark`}></div>
         </div>
       </div>
-      {/* {(scaledValue * multiplier).toFixed(decimal)} */}
       <input
         type="number"
         id={`${id}Number`}
@@ -57,11 +111,19 @@ const Slider = ({
         max={max * multiplier}
         step={isNaN(step) ? step : step * multiplier} // if step is not "any", multiply the step by the multiplier
         value={
-          // sliderValue !== 0 &&
           sliderValue !== '' ? (scaledValue * multiplier).toFixed(decimal) : ''
         }
-        onChange={handleNumberInput}
-        onBlur={handleOnBlur}
+        onChange={({ target: { value } }) =>
+          handleNumberInput(
+            value // current value
+          )
+        }
+        onBlur={({ target: { value } }) =>
+          handleNumberOnBlur(
+            value, // current value
+            1 / multiplier // reset value (before the multiplier) if the input is empty
+          )
+        }
         // readOnly
         // disabled={disabled} // Most sliders need to be disabled while a note is playing
         aria-labelledby={id}
