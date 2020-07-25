@@ -60,6 +60,7 @@ const SliderTime = ({
         // disabled={disabled} // Most sliders need to be disabled while a note is playing
         aria-labelledby={id}
       />
+      {unit}
       {/* {scaledValue < 1
         ? `${(scaledValue * 1000).toFixed(0)} ms`
         : `${scaledValue.toFixed(1)} s`} */}
