@@ -1,9 +1,8 @@
-import React, { useContext, useRef } from 'react';
+import React, { Fragment, useContext, useRef } from 'react';
 import VolumeEnvelopeContext from '../../context/volumeEnvelopeContext/volumeEnvelopeContext';
 import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
 import throttle from 'lodash.throttle';
-import SliderTime from '../uiElements/SliderTime';
-import SliderLevel from '../uiElements/SliderLevel';
+import Slider from '../uiElements/Slider';
 import styles from './VolumeEnvelope.module.scss';
 import useParameterRef from '../../hooks/usePararmeterRef';
 import getScaledValue, { scaledValue } from '../../utils/getScaledValue';
@@ -27,7 +26,32 @@ const VolumeEnvelope = () => {
   const oscillatorContext = useContext(OscillatorContext);
   const { notePlaying } = oscillatorContext;
 
-  // const [release, setRelease] = useState('1');
+  const parameters = [
+    {
+      name: volumeEnvelopeAttack,
+      setter: setVolumeEnvelopeAttack,
+      multiplier: 1000,
+      power: 2,
+    },
+    {
+      name: volumeEnvelopeDecay,
+      setter: setVolumeEnvelopeDecay,
+      multiplier: 1000,
+      power: 2,
+    },
+    {
+      name: volumeEnvelopeSustain,
+      setter: setVolumeEnvelopeSustain,
+      multiplier: 100,
+      power: 1,
+    },
+    {
+      name: volumeEnvelopeRelease,
+      setter: setVolumeEnvelopeRelease,
+      multiplier: 1000,
+      power: 2,
+    },
+  ];
 
   // Disable sliders while a note is playing
   // This functionality has been moved to Brain.js and disabled. Updates to the Oscillator/Wad only take effect if a note isn't playing
@@ -105,150 +129,47 @@ const VolumeEnvelope = () => {
           <div className={`synthModuleInner`}>
             <div className={`synthModuleSidebar`}>{/* Empty sidebar */}</div>
             <div className={`synthModuleControls`}>
-              <SliderTime
-                label={volumeEnvelopeAttack.label}
-                id={volumeEnvelopeAttack.id}
-                min={volumeEnvelopeAttack.min}
-                max={volumeEnvelopeAttack.max}
-                step={volumeEnvelopeAttack.step}
-                sliderValue={volumeEnvelopeAttack.sliderValue}
-                scaledValue={volumeEnvelopeAttack.scaledValue}
-                // disabled={disabled}
-                multiplier={1000}
-                decimal={0}
-                onChange={({ target: { value } }) =>
-                  handleSliderThrottled(
-                    volumeEnvelopeAttack, // parameter name
-                    setVolumeEnvelopeAttack, // parameter setter function
-                    value, // current value of the slider
-                    2 // slider power
-                  )
-                } // Destructuring e.target.value
-                handleNumberInput={({ target: { value } }) =>
-                  handleNumberInput(
-                    volumeEnvelopeAttack, // parameter name
-                    setVolumeEnvelopeAttack, // parameter setter function
-                    value, // current value
-                    0.001, // value multiplier
-                    2 // slider power
-                  )
-                }
-                handleOnBlur={({ target: { value } }) =>
-                  handleNumberOnBlur(
-                    setVolumeEnvelopeAttack, // parameter setter function
-                    value, // current value
-                    0.001 // reset value (before the multiplier) if the input is empty
-                  )
-                }
-              />
-              <SliderTime
-                label={volumeEnvelopeDecay.label}
-                id={volumeEnvelopeDecay.id}
-                min={volumeEnvelopeDecay.min}
-                max={volumeEnvelopeDecay.max}
-                step={volumeEnvelopeDecay.step}
-                sliderValue={volumeEnvelopeDecay.sliderValue}
-                scaledValue={volumeEnvelopeDecay.scaledValue}
-                // disabled={disabled}
-                multiplier={1000}
-                decimal={0}
-                onChange={({ target: { value } }) =>
-                  handleSliderThrottled(
-                    volumeEnvelopeDecay, // parameter name
-                    setVolumeEnvelopeDecay, // parameter setter function
-                    value, // current value of the slider
-                    2 // slider power
-                  )
-                } // Destructuring e.target.value
-                handleNumberInput={({ target: { value } }) =>
-                  handleNumberInput(
-                    volumeEnvelopeDecay, // parameter name
-                    setVolumeEnvelopeDecay, // parameter setter function
-                    value, // current value
-                    0.001, // value multiplier
-                    2 // slider power
-                  )
-                }
-                handleOnBlur={({ target: { value } }) =>
-                  handleNumberOnBlur(
-                    setVolumeEnvelopeDecay, // parameter setter function
-                    value, // current value
-                    0.001 // reset value (before the multiplier) if the input is empty
-                  )
-                }
-              />
-              <SliderLevel
-                label={volumeEnvelopeSustain.label}
-                id={volumeEnvelopeSustain.id}
-                min={volumeEnvelopeSustain.min}
-                max={volumeEnvelopeSustain.max}
-                step={volumeEnvelopeSustain.step}
-                sliderValue={volumeEnvelopeSustain.sliderValue}
-                scaledValue={volumeEnvelopeSustain.scaledValue}
-                // disabled={disabled}
-                multiplier={100}
-                decimal={0}
-                onChange={({ target: { value } }) =>
-                  handleSliderThrottled(
-                    volumeEnvelopeSustain, // parameter name
-                    setVolumeEnvelopeSustain, // parameter setter function
-                    value, // current value of the slider
-                    1 // slider power
-                  )
-                } // Destructuring e.target.value
-                handleNumberInput={({ target: { value } }) =>
-                  handleNumberInput(
-                    volumeEnvelopeSustain, // parameter name
-                    setVolumeEnvelopeSustain, // parameter setter function
-                    value, // current value
-                    0.01, // value multiplier
-                    1 // slider power
-                  )
-                }
-                handleOnBlur={({ target: { value } }) =>
-                  handleNumberOnBlur(
-                    setVolumeEnvelopeSustain, // parameter setter function
-                    value, // current value
-                    1 // reset value (before the multiplier) if the input is empty
-                  )
-                }
-              />
-              <SliderTime
-                label={volumeEnvelopeRelease.label}
-                id={volumeEnvelopeRelease.id}
-                min={volumeEnvelopeRelease.min}
-                max={volumeEnvelopeRelease.max}
-                step={volumeEnvelopeRelease.step}
-                sliderValue={volumeEnvelopeRelease.sliderValue}
-                scaledValue={volumeEnvelopeRelease.scaledValue}
-                // disabled={disabled}
-                multiplier={1000}
-                decimal={0}
-                onChange={({ target: { value } }) =>
-                  handleSliderThrottled(
-                    volumeEnvelopeRelease, // parameter name
-                    setVolumeEnvelopeRelease, // parameter setter function
-                    value, // current value of the slider
-                    2 // slider power
-                  )
-                } // Destructuring e.target.value
-                handleNumberInput={({ target: { value } }) =>
-                  handleNumberInput(
-                    volumeEnvelopeRelease, // parameter name
-                    setVolumeEnvelopeRelease, // parameter setter function
-                    value, // current value
-                    0.001, // value multiplier
-                    2 // slider power
-                  )
-                }
-                handleOnBlur={({ target: { value } }) =>
-                  handleNumberOnBlur(
-                    setVolumeEnvelopeRelease, // parameter setter function
-                    value, // current value
-                    0.001 // reset value (before the multiplier) if the input is empty
-                  )
-                }
-              />
+              {parameters.map(({ name, setter, multiplier, power }, index) => (
+                <Fragment key={index}>
+                  {console.log(name, setter, multiplier, power)}
+                  <Slider
+                    label={name.label}
+                    id={name.id}
+                    min={name.min}
+                    max={name.max}
+                    step={name.step}
+                    sliderValue={name.sliderValue}
+                    scaledValue={name.scaledValue}
+                    // disabled={disabled}
+                    multiplier={multiplier}
+                    decimal={0}
+                    onChange={({ target: { value } }) =>
+                      handleSliderThrottled(
+                        name, // parameter name
+                        setter, // parameter setter function
+                        value, // current value of the slider
+                        power // slider power
+                      )
+                    } // Destructuring e.target.value
+                    handleNumberInput={({ target: { value } }) =>
+                      handleNumberInput(
+                        name, // parameter name
+                        setter, // parameter setter function
+                        value, // current value
+                        1 / multiplier, // invert the value multiplier
+                        power // slider power
+                      )
+                    }
+                    handleOnBlur={({ target: { value } }) =>
+                      handleNumberOnBlur(
+                        setter, // parameter setter function
+                        value, // current value
+                        1 / multiplier // reset value (before the multiplier) if the input is empty
+                      )
+                    }
+                  />
+                </Fragment>
+              ))}
             </div>
           </div>
         </li>
