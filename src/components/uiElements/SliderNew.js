@@ -21,6 +21,7 @@ const SliderNew = ({
   paramName,
   paramSetter,
   power,
+  classname,
 }) => {
   // Event Handlers
   // Slider
@@ -77,9 +78,9 @@ const SliderNew = ({
     <label
       // htmlFor={id}
       id={paramId}
-      className={`labelLayout ${label}`}
+      className={`sliderContainer ${label} ${classname}`}
     >
-      <span className={`pb5`}>{label}</span>
+      <span className={`sliderLabel`}>{label}</span>
       <div className={`rangeContainer`}>
         <input
           type="range"
@@ -108,6 +109,7 @@ const SliderNew = ({
       <input
         type="number"
         id={`${paramId}Number`}
+        className={`sliderNumber`}
         name={`${paramId}Number`}
         min={min * multiplier}
         max={max * multiplier}

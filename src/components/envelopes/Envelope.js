@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import EnvelopeContext from '../../context/envelopeContext/envelopeContext';
+import AdsrGraph from './AdsrGraph';
 import SliderNew from '../uiElements/SliderNew';
 
 const Envelope = ({ envelope }) => {
@@ -58,29 +59,36 @@ const Envelope = ({ envelope }) => {
         <span className={`display block`}>{legend}</span>
       </h3>
       <div className={`synthModuleControls`}>
-        {parameters.map(
-          ({ paramName, paramSetter, multiplier, power }, index) => (
-            <Fragment key={index}>
-              {/* {console.log(paramName, setter, multiplier, power)} */}
-              <SliderNew
-                label={paramName.label}
-                moduleId={id}
-                paramId={paramName.id}
-                min={paramName.min}
-                max={paramName.max}
-                step={paramName.step}
-                sliderValue={paramName.sliderValue}
-                scaledValue={paramName.scaledValue}
-                // disabled={disabled}
-                multiplier={multiplier}
-                decimal={0}
-                paramName={paramName}
-                paramSetter={paramSetter}
-                power={power}
-              />
-            </Fragment>
-          )
-        )}
+        <AdsrGraph envelope={envelope} />
+        <div
+          // style={{ transform: 'rotateZ(-90deg)' }}
+          className={`envelopeSliderGroup`}
+        >
+          {parameters.map(
+            ({ paramName, paramSetter, multiplier, power }, index) => (
+              <Fragment key={index}>
+                {/* {console.log(paramName, setter, multiplier, power)} */}
+                <SliderNew
+                  label={paramName.label}
+                  moduleId={id}
+                  paramId={paramName.id}
+                  min={paramName.min}
+                  max={paramName.max}
+                  step={paramName.step}
+                  sliderValue={paramName.sliderValue}
+                  scaledValue={paramName.scaledValue}
+                  // disabled={disabled}
+                  multiplier={multiplier}
+                  decimal={0}
+                  paramName={paramName}
+                  paramSetter={paramSetter}
+                  power={power}
+                  classname={'envelopeSlider'}
+                />
+              </Fragment>
+            )
+          )}
+        </div>
       </div>
     </div>
     //     </li>

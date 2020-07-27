@@ -22,7 +22,7 @@ const EnvelopeState = (props) => {
         legend: `${num}`,
         envelopeAttack: {
           id: `env${num}Attack`,
-          label: 'Attack',
+          label: 'A',
           min: 0.001,
           max: 9.999,
           step: 'any',
@@ -31,7 +31,7 @@ const EnvelopeState = (props) => {
         },
         envelopeDecay: {
           id: `env${num}Decay`,
-          label: 'Decay',
+          label: 'D',
           min: 0.001,
           max: 9.999,
           step: 'any',
@@ -40,7 +40,7 @@ const EnvelopeState = (props) => {
         },
         envelopeSustain: {
           id: `env${num}Sustain`,
-          label: 'Sustain',
+          label: 'S',
           min: 0,
           max: 1,
           step: 0.01,
@@ -49,7 +49,7 @@ const EnvelopeState = (props) => {
         },
         envelopeRelease: {
           id: `env${num}Release`,
-          label: 'Release',
+          label: 'R',
           min: 0.001,
           max: 9.999,
           step: 'any',

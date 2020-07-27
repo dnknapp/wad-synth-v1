@@ -24,7 +24,7 @@ const SliderLevel = ({
     <label
       // htmlFor={id}
       id={id}
-      className={`labelLayout ${label}`}
+      className={`sliderContainer ${label}`}
     >
       <span className={`pb5`}>{label}</span>
       <div className={`rangeContainer`}>
