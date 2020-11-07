@@ -25,6 +25,7 @@ const Oscillators = () => {
 
   const [osc1, osc2, osc3] = oscillators; // Destructure the oscillators into individual objects
 
+  // TODO: Can I use useRef instead of useState to simplify/prevent rerender issues?
   // Setup state for Wads.
   const [oscillator1Wad, setOscillator1Wad] = useState(new Wad(osc1));
   const [oscillator2Wad, setOscillator2Wad] = useState(new Wad(osc2));
