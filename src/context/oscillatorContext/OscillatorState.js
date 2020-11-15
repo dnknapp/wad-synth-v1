@@ -65,8 +65,8 @@ const OscillatorState = (props) => {
           attack: 0.0, // Time in seconds from onset to peak volume.  Common values for oscillators may range from 0.05 to 0.3.
           decay: 0.0, // Time in seconds from peak volume to sustain volume.
           sustain: 1.0, // Sustain volume level. This is a percent of the peak volume, so sensible values are between 0 and 1.
-          hold: 0, // Time in seconds to maintain the sustain volume level. If set to -1, the sound will be sustained indefinitely until you manually call stop().
-          release: 1, // Time in seconds from the end of the hold period to zero volume, or from calling stop() to zero volume.
+          hold: -1, // Time in seconds to maintain the sustain volume level. If set to -1, the sound will be sustained indefinitely until you manually call stop().
+          release: 0, // Time in seconds from the end of the hold period to zero volume, or from calling stop() to zero volume.
         },
       });
     });
