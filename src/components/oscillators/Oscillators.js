@@ -1,7 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import Wad from 'web-audio-daw';
 import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
-import styles from './Oscillators.module.scss';
 import Oscillator from './Oscillator';
 
 const Oscillators = () => {
