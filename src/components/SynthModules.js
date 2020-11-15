@@ -4,6 +4,7 @@ import Oscillators from './oscillators/Oscillators';
 import VolumeEnvelope from './volumeEnvelope/VolumeEnvelope';
 import Keyboard from './keyboard/Keyboard';
 import Envelopes from './envelopes/Envelopes';
+import Output from './output/Output';
 
 const SynthModules = () => {
   return (
@@ -13,7 +14,7 @@ const SynthModules = () => {
       <Oscillators />
       <Envelopes />
       <VolumeEnvelope />
-
+      <Output />
       <Keyboard />
       {/* </div> */}
     </main>
