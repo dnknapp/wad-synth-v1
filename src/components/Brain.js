@@ -78,7 +78,8 @@ const Oscillators = () => {
         );
       }, 500);
     } else if (notePlaying === false) {
-      allOscillatorWads.current.stop();
+      typeof allOscillatorWads.current !== 'undefined' &&
+        allOscillatorWads.current.stop();
       clearInterval(meterIntervalId.current); // Stop the audioMeter
     }
   }, [notePlaying]);

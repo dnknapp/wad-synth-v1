@@ -64,8 +64,15 @@ const Oscillator = ({ oscillator }) => {
         <span className={`display block`}>{oscillator.legend}</span>
       </h3>
       <div className={`synthModuleControls`}>
-        <OscillatorWaveSelect id={id} waveSelected={source} />
-        <OscillatorOctaveSelect id={id} />
+        <OscillatorWaveSelect
+          id={id}
+          waveSelected={source}
+          setOscillatorSource={setOscillatorSource}
+        />
+        <OscillatorOctaveSelect
+          id={id}
+          setOscillatorOctave={setOscillatorOctave}
+        />
         {parameters.map(
           (
             { paramName, paramSetter, multiplier, power, currentDetune },

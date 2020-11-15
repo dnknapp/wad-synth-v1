@@ -25,6 +25,18 @@ const AdsrGraph = ({ envelope }) => {
   const [x4, setX4] = useState(50);
   const y4 = 50;
   const allPoints = [x0, y0, x1, y1, x2, y2, x3, y3, x4, y4];
+  // const allPoints = [
+  //   `${x0}%`,
+  //   `${y0}%`,
+  //   `${x1}%`,
+  //   `${y1}%`,
+  //   `${x2}%`,
+  //   `${y2}%`,
+  //   `${x3}%`,
+  //   `${y3}%`,
+  //   `${x4}%`,
+  //   `${y4}%`,
+  // ];
 
   // Update the Attack ramp
   useEffect(() => {
@@ -56,36 +68,114 @@ const AdsrGraph = ({ envelope }) => {
   }, [x3, envelopeRelease]);
 
   // Create a Ref for the polyline. This is used to center it.
-  const svgRef = useRef();
-  const polylineRef = useRef();
-  const [polylineTranslate, setPolylineTranslate] = useState(0);
-  // TODO: Center the polyline
-  // I think it should be: containerWidth/2 - polylineWidth/2
-  // FIXME: setPolylineTranslate() + allPoints is causing an infinite loop
+  // const svgRef = useRef();
+  // const polylineRef = useRef();
+  // const polylineWidth = useRef(0);
+  // const polylineTranslate = useRef(0);
+  // TODO: Center the polyline... This isn't working right but I don't think I like it anyway
   // useEffect(() => {
-  //   console.log(svgRef.current.getBoundingClientRect().width);
+  //   polylineWidth.current = polylineRef.current.getBoundingClientRect().width;
+  // }, [allPoints]);
+
+  // useEffect(() => {
+  //   console.log(polylineWidth.current);
+  //   polylineTranslate.current =
+  //     svgRef.current.getBoundingClientRect().width / 2 - polylineWidth.current;
+  // }, [polylineWidth.current]);
+
+  // useEffect(() => {
+  //   // console.log(svgRef.current.getBoundingClientRect().width);
   //   console.log(polylineRef.current.getBoundingClientRect().width);
-  //   setPolylineTranslate(
-  //     svgRef.current.getBoundingClientRect().width / 2 -
-  //       polylineRef.current.getBoundingClientRect().width / 2
-  //   );
+  //   // setPolylineTranslate(
+  //   //   svgRef.current.getBoundingClientRect().width / 2 -
+  //   //     polylineRef.current.getBoundingClientRect().width / 2
+  //   // );
+  //   // setPolylineTranslate(
+  //   //   200 - polylineRef.current.getBoundingClientRect().width
+  //   // );
+  // }, [allPoints]);
   // }, [svgRef, polylineRef, allPoints]);
 
   return (
     <div className={`${styles.adsrGraphContainer}`}>
-      <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" ref={svgRef}>
-        {/* <svg x="50%"> */}
-        <polyline
-          // stroke="#000000"
-          // fill="none"
-          // points="4,45 38,4 100,25, 160,25 196,45"
-          // points={points.current}
-          // points={`${x0},${y0} ${x1},${y1}`}
-          transform={`translate(${polylineTranslate}, 0)`}
-          points={allPoints}
-          ref={polylineRef}
+      <svg
+        viewBox="0 0 200 50"
+        // width="100%"
+        // height="100%"
+        preserveAspectRatio="none" // stretch the svg to fit the container
+        xmlns="http://www.w3.org/2000/svg"
+        // ref={svgRef}
+      >
+        {/* Turning this off because I don't know how to make the dots circular again */}
+        <defs>
+          <marker
+            id={`${id}-dot`}
+            viewBox="0 0 4 4"
+            refX="2"
+            refY="2"
+            markerWidth="4"
+            markerHeight="4"
+            // preserveAspectRatio="xMidYMid"
+            // markerUnits="userSpaceOnUse"
+          >
+            {/* <circle cx="5" cy="5" r="5" fill="white" /> */}
+            <line
+              x1="2"
+              y1="2"
+              x2="2"
+              y2="2"
+              vectorEffect="non-scaling-stroke"
+              className={`${styles.vertex}`}
+            />
+          </marker>
+        </defs>
+
+        <line
+          x1="-10"
+          y1=".5"
+          x2="210"
+          y2=".5"
+          strokeDasharray="1, 2"
+          vectorEffect="non-scaling-stroke"
+          className={`${styles.gridLine}`}
         />
-        {/* </svg> */}
+        <line
+          x1="-10"
+          y1="16"
+          x2="210"
+          y2="16"
+          strokeDasharray="1, 2"
+          vectorEffect="non-scaling-stroke"
+          className={`${styles.gridLine}`}
+        />
+        <line
+          x1="-10"
+          y1="33"
+          x2="210"
+          y2="33"
+          strokeDasharray="1, 2"
+          vectorEffect="non-scaling-stroke"
+          className={`${styles.gridLine}`}
+        />
+        <line
+          x1="-10"
+          y1="49.5"
+          x2="210"
+          y2="49.5"
+          strokeDasharray="1, 2"
+          vectorEffect="non-scaling-stroke"
+          className={`${styles.gridLine}`}
+        />
+
+        <polyline
+          // transform={`translate(${polylineTranslate.current}, 0)`}
+          points={allPoints}
+          vectorEffect="non-scaling-stroke" // keep the stroke width correct when the svg stretches
+          markerStart={`url(#${id}-dot)`}
+          markerMid={`url(#${id}-dot)`}
+          markerEnd={`url(#${id}-dot)`}
+          // ref={polylineRef}
+        />
       </svg>
     </div>
   );

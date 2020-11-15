@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, useState } from 'react';
-import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
-import styles from './OscillatorOctaveSelect.module.scss';
+import React, { Fragment, memo, useContext, useState } from 'react';
+// import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
+// import styles from './OscillatorOctaveSelect.module.scss';
 
-const OscillatorOctaveSelect = ({ id }) => {
-  const oscillatorContext = useContext(OscillatorContext);
-  const { setOscillatorOctave } = oscillatorContext;
+const OscillatorOctaveSelect = ({ id, setOscillatorOctave }) => {
+  // const oscillatorContext = useContext(OscillatorContext);
+  // const { setOscillatorOctave } = oscillatorContext;
 
   // Transpose the pitch for different octave settings
   const octaves = [
@@ -80,4 +80,17 @@ const OscillatorOctaveSelect = ({ id }) => {
   );
 };
 
+// TODO: There are weird rerenders happening. I don't know what's going on.
+// const equalProps = (prevProps, nextProps) => {
+//   console.log(prevProps.id);
+//   console.log(nextProps.id);
+//   console.log(prevProps.id === nextProps.id);
+//   if (prevProps.id === nextProps.id) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
+
 export default OscillatorOctaveSelect;
+// export default memo(OscillatorOctaveSelect, equalProps);

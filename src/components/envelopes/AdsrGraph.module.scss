@@ -13,8 +13,18 @@
   svg {
     width: 100%;
     overflow: visible;
-    polyline {
+    .vertex {
+      stroke: $color-malibu;
+      stroke-width: 0.25rem;
+      stroke-linecap: round;
+    }
+    .gridLine {
       stroke: $color-catskill;
+      stroke-width: 1px;
+      opacity: 0.25;
+    }
+    polyline {
+      stroke: $color-malibu;
       stroke-width: 2px;
       fill: none;
     }

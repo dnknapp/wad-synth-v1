@@ -13,12 +13,12 @@
 @import './styles/inputradio'; // Radio Buttons
 
 html {
-  background-color: $color-catskill; // the background color if you scroll too far
+  background-color: $color-shark; // the background color if you scroll too far
 }
 
 body {
   min-height: 100vh;
-  padding-bottom: 12rem; // Prevent object being hidden by the keyboard
-  background: $color-catskill;
+  padding: 0.25rem 0.25rem 12rem 0.25rem; // Prevent object being hidden by the keyboard
+  background: $color-shark;
   // background: #ddd;
 }

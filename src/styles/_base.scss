@@ -99,12 +99,12 @@ hr {
 
 ::-moz-selection {
   background: $selection-color;
-  text-shadow: none;
+  // text-shadow: none;
 }
 
 ::selection {
   background: $selection-color;
-  text-shadow: none;
+  // text-shadow: none;
 }
 
 /**

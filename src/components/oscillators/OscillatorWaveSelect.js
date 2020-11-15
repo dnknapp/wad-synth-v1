@@ -1,10 +1,10 @@
-import React, { Fragment, useContext } from 'react';
-import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
-import styles from './OscillatorWaveSelect.module.scss';
+import React, { Fragment, memo, useContext } from 'react';
+// import OscillatorContext from '../../context/oscillatorContext/oscillatorContext';
+// import styles from './OscillatorWaveSelect.module.scss';
 
-const OscillatorWaveSelect = ({ id, waveSelected }) => {
-  const oscillatorContext = useContext(OscillatorContext);
-  const { setOscillatorSource } = oscillatorContext;
+const OscillatorWaveSelect = ({ id, waveSelected, setOscillatorSource }) => {
+  // const oscillatorContext = useContext(OscillatorContext);
+  // const { setOscillatorSource } = oscillatorContext;
   const waveforms = [
     {
       value: 'triangle',
@@ -97,4 +97,4 @@ const OscillatorWaveSelect = ({ id, waveSelected }) => {
   );
 };
 
-export default OscillatorWaveSelect;
+export default memo(OscillatorWaveSelect);
