@@ -1,5 +1,6 @@
-@import '../../styles/variables';
+// @import '../../styles/variables';
 // @import '../../styles/mixins';
+@use '../../styles/members' as *;
 
 .adsrGraphContainer {
   position: relative;

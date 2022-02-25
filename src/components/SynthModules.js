@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './SynthModules.module.scss';
-import Oscillators from './oscillators/Oscillators';
-import VolumeEnvelope from './volumeEnvelope/VolumeEnvelope';
-import Keyboard from './keyboard/Keyboard';
 import Envelopes from './envelopes/Envelopes';
+import Keyboard from './keyboard/Keyboard';
+import Oscillators from './oscillators/Oscillators';
 import Output from './output/Output';
+import styles from './SynthModules.module.scss';
+import VolumeEnvelope from './volumeEnvelope/VolumeEnvelope';
 
 const SynthModules = () => {
   return (

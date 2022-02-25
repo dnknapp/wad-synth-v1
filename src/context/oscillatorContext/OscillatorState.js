@@ -2,17 +2,17 @@ import React, { useReducer } from 'react';
 import OscillatorContext from './oscillatorContext';
 import oscillatorReducer from './oscillatorReducer';
 import {
-  SET_OSCILLATORS,
-  SET_OSCILLATOR_SOURCE,
-  SET_OSCILLATOR_VOLUME,
-  SET_OSCILLATOR_PITCH,
-  SET_OSCILLATOR_OCTAVE,
-  SET_OSCILLATOR_DETUNE_COARSE,
-  SET_OSCILLATOR_DETUNE_FINE,
-  SET_OSCILLATOR_DETUNE,
   SET_NOTE_PITCH,
   SET_NOTE_PLAYING,
   SET_NOTE_VOLUME,
+  SET_OSCILLATORS,
+  SET_OSCILLATOR_DETUNE,
+  SET_OSCILLATOR_DETUNE_COARSE,
+  SET_OSCILLATOR_DETUNE_FINE,
+  SET_OSCILLATOR_OCTAVE,
+  SET_OSCILLATOR_PITCH,
+  SET_OSCILLATOR_SOURCE,
+  SET_OSCILLATOR_VOLUME,
 } from './oscillatorTypes';
 
 const OscillatorState = (props) => {
@@ -20,7 +20,9 @@ const OscillatorState = (props) => {
   const initialState = {
     oscillators: [],
   };
+
   // Loop through oscillator numbers and add oscillator objects to the initial state
+  // FIXME this function runs every time a key is clicked or released
   (function addOscillator() {
     oscNums.forEach((num) => {
       initialState.oscillators.push({

@@ -1,3 +1,6 @@
+@use 'variables' as *; // TODO: use @use 'variables' as vars; instead
+@use 'sass:math';
+
 /* Mixins and Functions */
 
 /* ----------------------------
@@ -6,7 +9,7 @@ PX to REM
 
 // Convert px to rem for a single value, like font shorthand
 @function calcRem($size) {
-  $remSize: $size / $base-value;
+  $remSize: calc($size / $base-value);
   @return #{$remSize}rem;
 }
 

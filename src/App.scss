@@ -1,16 +1,5 @@
-/* autoprefixer grid: on */
-
-/* Site Styles */
-
-// Base
-@import './styles/variables'; // Fonts, Colors, Page Margin and Grid Default Values
-@import './styles/mixins'; // PX to Rem, Breakpoints, Page Margin and Grid Tools
-@import './styles/base'; // Normalize, resets
-@import './styles/helpers'; // Hidden, iInline, Colors, Margins & Padding
-@import './styles/typography'; // Text styles and helpers
-@import './styles/elements'; // Defaults for img, buttons, hr, ul, etc
-@import './styles/inputrange'; // Sliders
-@import './styles/inputradio'; // Radio Buttons
+@use 'styles';
+@use './styles/variables' as *;
 
 html {
   background-color: $color-shark; // the background color if you scroll too far

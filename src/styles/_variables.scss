@@ -29,51 +29,56 @@ $hr-color: #ccc;
 //   --color-azure: 205, 100%, 47%; //#008CF0
 // }
 // --- App Background
-$color-catskill: hsla(220, 34, 92, 1); // #E4E9F2
+$color-catskill: hsla(220, 34%, 92%, 1); // #E4E9F2
 // --- Inputs
-$color-lcd-green: hsla(119, 75, 45, 1); // #1FC71D
+$color-lcd-green: hsla(119, 75%, 45%, 1); // #1FC71D
 
 // Element outlines, backgrounds, text
-$color-shark: hsla(220, 12, 16, 1); // #24272E
-$color-shark30: hsla(220, 12, 16, 0.3); // Slider shadows
+$color-shark: hsla(220, 12%, 16%, 1); // #24272E
+$color-shark30: hsla(220, 12%, 16%, 0.3); // Slider shadows
 
-$color-malibu: hsla(220, 100, 73, 1); // #78a5ff active buttons
+$color-malibu: hsla(220, 100%, 73%, 1); // #78a5ff active buttons
 
 // Blue Module
-$color-azure100: hsla(205, 100, 47, 1); //#008CF0
-$color-azure50: hsla(205, 100, 47, 0.5);
-$color-azure10: hsla(205, 100, 47, 0.1);
+$color-azure100: hsla(205, 100%, 47%, 1); //#008CF0
+$color-azure50: hsla(205, 100%, 47%, 0.5);
+$color-azure10: hsla(205, 100%, 47%, 0.1);
 
 // Keyboard
-$color-sky100: hsla(200, 80, 66, 1); // #64C1EE
-$color-sky50: hsla(200, 80, 66, 0.5);
-$color-sky10: hsla(200, 80, 66, 0.1);
+$color-sky100: hsla(200, 80%, 66%, 1); // #64C1EE
+$color-sky50: hsla(200, 80%, 66%, 0.5);
+$color-sky10: hsla(200, 80%, 66%, 0.1);
 
 // Design V2
 // Blue
-$color-dodger: hsla(202, 68, 54, 1); // #399FDA
-$color-cobalt: hsla(202, 72, 45, 1); // #2089C6
+$color-dodger: hsla(202, 68%, 54%, 1); // #399FDA
+$color-cobalt: hsla(202, 72%, 45%, 1); // #2089C6
 
 // Orange
-$color-jaffa: hsla(22, 76, 53, 1); // #E3702E
-$color-beech: hsla(22, 79, 45, 1); // #CD5B18
+$color-jaffa: hsla(22, 76%, 53%, 1); // #E3702E
+$color-beech: hsla(22, 79%, 45%, 1); // #CD5B18
 
 // Green
-$color-shamrock: hsla(150, 60, 48, 1); // #31C47B
-$color-sap: hsla(150, 77, 38, 1); // #16AD61
+$color-shamrock: hsla(150, 60%, 48%, 1); // #31C47B
+$color-sap: hsla(150, 77%, 38%, 1); // #16AD61
 
 // Yellow
-$color-tahuna: hsla(61, 56, 86, 1); // #EEEFC6 "screens"/mono-spaced fonts
-$color-tahuna50: hsla(61, 56, 86, 0.5); // glow/shadows
+$color-tahuna: hsla(61, 56%, 86%, 1); // #EEEFC6 "screens"/mono-spaced fonts
+$color-tahuna50: hsla(61, 56%, 86%, 0.5); // glow/shadows
 
 // Design V1
-$color-aztek: hsla(208, 72, 15, 1); // #0B2943 Main font color
-$color-jellybean: hsla(208, 63, 41, 1); // #276DAA Link and button hover
+$color-aztek: hsla(208, 72%, 15%, 1); // #0B2943 Main font color
+$color-jellybean: hsla(208, 63%, 41%, 1); // #276DAA Link and button hover
 // $color-malibu: hsla(208, 68, 93, 1); // #E1EEF9 Nav button hover background
 
-$color-mariner: hsla(208, 75, 44, 1); // #1C76C4 Only used for the Focus Outline
+$color-mariner: hsla(
+  208,
+  75%,
+  44%,
+  1
+); // #1C76C4 Only used for the Focus Outline
 
-$color-white: hsla(0, 0, 100, 1);
+$color-white: hsla(0, 0%, 100%, 1);
 
 // Text selection background color
 $selection-color: $color-malibu; // referenced in _base
@@ -99,15 +104,15 @@ $radius-super: 2rem;
 $radius-pill: 10rem;
 
 //Shadows
-$box-shadow-big: 0 10px 40px -5px hsla(208, 29, 35, 0.4);
+$box-shadow-big: 0 10px 40px -5px hsla(208, 29%, 35%, 0.4);
 // $box-shadow-small: 0 5px 20px -5px hsla(208, 20, 34, 0.4),
 //   0 2px 2px -2px hsla(208, 20, 34, 0.4);
-$box-shadow-small: 0 12px 30px -10px hsla(208, 29, 35, 0.4),
-  0 2px 2px -2px hsla(208, 29, 35, 0.4);
-$box-shadow-tiny: 0 2px 2px 0 hsla(208, 29, 35, 0.3);
-$box-shadow-tab-bar: 0 0px 15px 0 hsla(208, 29, 35, 0.3),
-  0 -4px 2px -4px hsla(208, 29, 35, 0.3);
-$box-shadow-question: 0 4px 10px 0px hsla(208, 29, 35, 0.1),
-  0 2px 4px -2px hsla(208, 29, 35, 0.2);
-$text-shadow: 0 0 0.75rem hsla(208, 29, 35, 0.3);
-$inset-shadow: inset 0 0 0.75rem hsla(208, 29, 35, 0.3);
+$box-shadow-small: 0 12px 30px -10px hsla(208, 29%, 35%, 0.4),
+  0 2px 2px -2px hsla(208, 29%, 35%, 0.4);
+$box-shadow-tiny: 0 2px 2px 0 hsla(208, 29%, 35%, 0.3);
+$box-shadow-tab-bar: 0 0px 15px 0 hsla(208, 29%, 35%, 0.3),
+  0 -4px 2px -4px hsla(208, 29%, 35%, 0.3);
+$box-shadow-question: 0 4px 10px 0px hsla(208, 29%, 35%, 0.1),
+  0 2px 4px -2px hsla(208, 29%, 35%, 0.2);
+$text-shadow: 0 0 0.75rem hsla(208, 29%, 35%, 0.3);
+$inset-shadow: inset 0 0 0.75rem hsla(208, 29%, 35%, 0.3);

@@ -1,3 +1,5 @@
+@use './members' as *;
+
 .rangeContainer {
   position: relative;
   display: flex;

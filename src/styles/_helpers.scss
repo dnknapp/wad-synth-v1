@@ -1,3 +1,5 @@
+@use './members' as *;
+
 /* ----------------------------
 Visibility
 ---------------------------- */
@@ -130,7 +132,7 @@ $spaceamounts: (
 $sides: (top, bottom, left, right); // Leave this variable alone
 
 @each $space in $spaceamounts {
-  $spaceRem: #{$space / $base-value}rem;
+  $spaceRem: #{calc($space / $base-value)}rem;
 
   @each $side in $sides {
     .m#{str-slice($side, 0, 1)}#{$space} {
